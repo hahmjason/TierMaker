@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대한민국 222개 전국 대학 티어메이커 (Korea University TierMaker)</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151b2b;
+      --bg-card-hover: #1e2638;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-focus: #3b82f6;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --danger: #ef4444;
+      --success: #10b981;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(to right, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-badge {
+      font-size: 11px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      border-color: var(--border-color);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+    .btn-accent:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    .view-toggles {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 3px;
+      border: 1px solid var(--border-color);
+    }
+
+    .view-toggle-btn {
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .view-toggle-btn.active {
+      background: #334155;
+      color: #f8fafc;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* TOP NOTICE / GUIDE */
+    .banner-box {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .banner-text {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+    }
+
+    .banner-icon {
+      font-size: 24px;
+    }
+
+    .banner-stat {
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    /* TIER BOARD */
+    .tier-board {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      margin-bottom: 30px;
+    }
+
+    .tier-row {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 105px;
+      transition: background 0.15s ease;
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .tier-row:last-child {
+      border-bottom: none;
+    }
+
+    .tier-row.drag-over {
+      background: rgba(59, 130, 246, 0.15);
+      outline: 2px dashed #60a5fa;
+    }
+
+    .tier-header {
+      width: 135px;
+      min-width: 135px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      text-align: center;
+      color: #0f172a;
+      font-weight: 800;
+      font-size: 17px;
+      position: relative;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+      box-shadow: inset -2px 0 6px rgba(0,0,0,0.15);
+    }
+
+    .tier-header:hover {
+      filter: brightness(1.08);
+    }
+
+    .tier-label {
+      word-break: keep-all;
+      line-height: 1.25;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+    }
+
+    .tier-count {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: 0.75;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+
+    .tier-actions {
+      display: flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 4px 6px;
+      gap: 3px;
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tier-action-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: all 0.15s ease;
+    }
+
+    .tier-action-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    .tier-dropzone {
+      flex: 1;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-content: flex-start;
+      align-items: center;
+      min-height: 95px;
+    }
+
+    .dropzone-empty-hint {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-style: italic;
+      padding: 12px;
+      pointer-events: none;
+      display: none;
+    }
+
+    .tier-dropzone:empty::after {
+      content: '여기로 대학을 드래그하여 배치하세요';
+      color: rgba(148, 163, 184, 0.4);
+      font-size: 12.5px;
+      font-weight: 500;
+      margin: auto 8px;
+    }
+
+    /* UNIVERSITY CARD */
+    .univ-card {
+      width: 108px;
+      height: 94px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 9px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      cursor: grab;
+      position: relative;
+      transition: all 0.18s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .univ-card:active {
+      cursor: grabbing;
+      opacity: 0.7;
+    }
+
+    .univ-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: rgba(96, 165, 250, 0.6);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(59, 130, 246, 0.25);
+      z-index: 10;
+    }
+
+    .univ-card.dragging {
+      opacity: 0.4;
+      border: 2px dashed #60a5fa;
+    }
+
+    .univ-emblem {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 5px;
+      overflow: hidden;
+      background: #1e293b;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .univ-logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 3px;
+      background: white;
+    }
+
+    .univ-badge-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      letter-spacing: -0.5px;
+      text-align: center;
+      line-height: 1.1;
+      padding: 2px;
+    }
+
+    .univ-short-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #f1f5f9;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 98px;
+      line-height: 1.2;
+    }
+
+    .univ-meta {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 3px;
+    }
+
+    .univ-tag {
+      font-size: 9.5px;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+    }
+
+    /* VIEW MODES */
+    /* 1. Name only mode */
+    body.mode-name-only .univ-card {
+      height: 52px;
+      width: 102px;
+      padding: 4px 6px;
+    }
+    body.mode-name-only .univ-emblem {
+      display: none;
+    }
+    body.mode-name-only .univ-short-name {
+      font-size: 13px;
+    }
+
+    /* 2. Compact mode */
+    body.mode-compact .univ-card {
+      width: 78px;
+      height: 72px;
+      padding: 4px;
+    }
+    body.mode-compact .univ-emblem {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 3px;
+    }
+    body.mode-compact .univ-short-name {
+      font-size: 11px;
+      max-width: 72px;
+    }
+    body.mode-compact .univ-meta {
+      display: none;
+    }
+
+    /* TOOLTIP */
+    .custom-tooltip {
+      position: fixed;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      border-radius: 10px;
+      padding: 12px 16px;
+      max-width: 280px;
+      color: white;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: translateY(6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    .custom-tooltip.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .tt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 6px;
+    }
+    .tt-name {
+      font-weight: 800;
+      font-size: 15px;
+      color: #60a5fa;
+    }
+    .tt-badge {
+      font-size: 10.5px;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .tt-desc {
+      font-size: 12px;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    /* UNRANKED POOL SECTION */
+    .pool-section {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: 40px;
+    }
+
+    .pool-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .pool-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .pool-title {
+      font-size: 17px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pool-count-pill {
+      font-size: 12px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    .search-box {
+      position: relative;
+      width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 12px 8px 34px;
+      color: white;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip:hover {
+      background: rgba(51, 65, 85, 0.8);
+      color: white;
+    }
+
+    .chip.active {
+      background: #2563eb;
+      color: white;
+      border-color: #3b82f6;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .pool-dropzone {
+      min-height: 180px;
+      max-height: 480px;
+      overflow-y: auto;
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px dashed rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-content: flex-start;
+    }
+
+    .pool-dropzone.drag-over {
+      border-color: #60a5fa;
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .pool-empty-message {
+      width: 100%;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      gap: 8px;
+    }
+
+    /* PRESET SHOWCASE SECTION */
+    .preset-section {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .preset-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+    }
+
+    .preset-title-wrap h2 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preset-title-wrap p {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    .preset-tabs {
+      display: flex;
+      gap: 8px;
+      background: rgba(30, 41, 59, 0.6);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .preset-tab-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-sub);
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .preset-tab-btn.active {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .preset-info-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
+    .preset-info-card strong {
+      color: #60a5fa;
+    }
+
+    .preset-actions-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 14px;
+    }
+
+    .preset-display-board {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .preset-row {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(15, 23, 42, 0.5);
+      min-height: 80px;
+    }
+    .preset-row:last-child {
+      border-bottom: none;
+    }
+    .preset-header-box {
+      width: 140px;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #0f172a;
+      padding: 10px;
+    }
+    .preset-card-container {
+      flex: 1;
+      padding: 8px 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      width: 90%;
+      max-width: 420px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      transform: translateY(10px);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+    }
+
+    .color-palette {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .color-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.15s ease;
+    }
+
+    .color-swatch:hover {
+      transform: scale(1.15);
+    }
+
+    .color-swatch.selected {
+      border-color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 12.5px;
+      border-top: 1px solid var(--border-color);
+      background: #090d16;
+    }
+
+    /* QUICK MOVE MENU (Context/Click) */
+    .quick-menu {
+      position: fixed;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 5000;
+      padding: 6px;
+      min-width: 150px;
+      display: none;
+    }
+    .quick-menu.active {
+      display: block;
+    }
+    .quick-menu-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 4px;
+    }
+    .quick-menu-item {
+      padding: 7px 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quick-menu-item:hover {
+      background: #334155;
+      color: white;
+    }
+    .quick-tier-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      border: 1px solid #3b82f6;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      z-index: 9999;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(60px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">🎓</div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="brand-title">전국 대학 티어메이커</span>
+          <span class="brand-badge">222개 대학 완전 수록</span>
+        </div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top: 1px;">
+          Korea University TierMaker • 공대·종합·인문 객관 지표 완비
+        </p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <!-- View mode toggles -->
+      <div class="view-toggles" title="대학 카드 표시 모드">
+        <button class="view-toggle-btn active" onclick="setViewMode('default')">🖼️ 로고+이름</button>
+        <button class="view-toggle-btn" onclick="setViewMode('name-only')">🏷️ 이름만</button>
+        <button class="view-toggle-btn" onclick="setViewMode('compact')">📱 미니</button>
+      </div>
+
+      <!-- Action buttons -->
+      <button class="btn btn-primary" onclick="openAddTierModal()">
+        <span>➕</span> 티어 추가
+      </button>
+      <button class="btn btn-accent" onclick="exportToImage()">
+        <span>📸</span> 티어표 저장 (PNG)
+      </button>
+      <button class="btn btn-secondary" onclick="resetAllToPool()">
+        <span>🔄</span> 전체 초기화
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- TOP STATS / BANNER -->
+    <div class="banner-box">
+      <div class="banner-text">
+        <span class="banner-icon">💡</span>
+        <div>
+          <span>마우스로 대학 카드를 원하는 티어로 <strong>드래그 & 드롭</strong>하세요. (더블클릭/클릭으로 퀵 이동 가능)</span>
+          <span style="display: block; font-size: 12px; color: #94a3b8; margin-top: 2px;">
+            티어 이름과 색상은 각 행의 ⚙️ 버튼 또는 라벨을 클릭하여 언제든지 커스텀할 수 있습니다.
+          </span>
+        </div>
+      </div>
+      <div style="text-align: right; min-width: 140px;">
+        <span style="font-size: 12px; color: var(--text-muted);">배치 현황</span>
+        <div style="font-size: 17px; font-weight: 800; color: #f8fafc;">
+          <span id="ranked-count" style="color: #60a5fa;">0</span> / 222개
+        </div>
+      </div>
+    </div>
+
+    <!-- TIER BOARD -->
+    <section class="tier-board" id="main-tier-board">
+      <!-- Tier rows will be rendered here dynamically -->
+    </section>
+
+    <!-- UNRANKED UNIVERSITY POOL -->
+    <section class="pool-section">
+      <div class="pool-controls">
+        <div class="pool-header-row">
+          <div class="pool-title">
+            <span>대기열 풀 (미배치 대학)</span>
+            <span class="pool-count-pill" id="pool-count">222개</span>
+          </div>
+
+          <!-- Search Box -->
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="univ-search" placeholder="대학명 또는 초성 검색 (예: 서울, ㅅㅇㄷ)..." oninput="filterUniversities()">
+          </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Region filter -->
+          <div class="filter-chips" id="region-chips">
+            <button class="chip active" onclick="setRegionFilter('ALL', this)">전체 지역 (222)</button>
+            <button class="chip" onclick="setRegionFilter('서울', this)">서울 (41)</button>
+            <button class="chip" onclick="setRegionFilter('경기/인천', this)">경기/인천 (35)</button>
+            <button class="chip" onclick="setRegionFilter('대전/세종/충청', this)">충청/대전/세종 (40)</button>
+            <button class="chip" onclick="setRegionFilter('대구/경북', this)">대구/경북 (24)</button>
+            <button class="chip" onclick="setRegionFilter('부산/울산/경남', this)">부산/울산/경남 (22)</button>
+            <button class="chip" onclick="setRegionFilter('광주/전라', this)">광주/전라 (28)</button>
+            <button class="chip" onclick="setRegionFilter('강원', this)">강원 (10)</button>
+            <button class="chip" onclick="setRegionFilter('제주', this)">제주 (2)</button>
+          </div>
+
+          <!-- Type filter -->
+          <div class="filter-chips" id="type-chips">
+            <button class="chip active" onclick="setTypeFilter('ALL', this)">전체 유형</button>
+            <button class="chip" onclick="setTypeFilter('과기원', this)">과기원 (4대과기원+KENTECH)</button>
+            <button class="chip" onclick="setTypeFilter('국립', this)">국공립대</button>
+            <button class="chip" onclick="setTypeFilter('사립', this)">사립대</button>
+            <button class="chip" onclick="setTypeFilter('교육대', this)">교육대</button>
+            <button class="chip" onclick="setTypeFilter('특수목적', this)">특수목적/사관학교</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- University Cards Container -->
+      <div class="pool-dropzone" id="unranked-pool" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'pool')">
+        <!-- University cards will be inserted here -->
+      </div>
+    </section>
+
+    <!-- PRESET SHOWCASE SECTION -->
+    <section class="preset-section">
+      <div class="preset-header">
+        <div class="preset-title-wrap">
+          <h2>📊 객관적 역량 기반 예시 티어표 (수능 입결 배제)</h2>
+          <p>
+            연구비 수주액, 전임교원 논문 피인용도, 대기업 계약학과·산학협력, 정부 특성화 사업 등 다각적 역량 지표를 바탕으로 구성된 분석 모델입니다.
+          </p>
+        </div>
+
+        <div class="preset-tabs">
+          <button class="preset-tab-btn active" onclick="switchPresetTab('engineering', this)">
+            ⚙️ 공학·기술계열 (공대 기준)
+          </button>
+          <button class="preset-tab-btn" onclick="switchPresetTab('comprehensive', this)">
+            🌐 종합 대학 역량
+          </button>
+          <button class="preset-tab-btn" onclick="switchPresetTab('humanities', this)">
+            📜 인문·사회계열
+          </button>
+        </div>
+      </div>
+
+      <!-- Preset Info Box -->
+      <div class="preset-info-card" id="preset-info-text">
+        <!-- Dynamically injected explanation -->
+      </div>
+
+      <div class="preset-actions-bar">
+        <button class="btn btn-primary" onclick="loadActivePresetToBoard()">
+          <span>⭐</span> 이 예시 티어표를 내 작업대로 불러오기 (수정 가능)
+        </button>
+      </div>
+
+      <!-- Preset Display Board -->
+      <div class="preset-display-board" id="preset-display-board">
+        <!-- Preset rows rendered dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ADD TIER MODAL -->
+  <div class="modal-overlay" id="add-tier-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>새로운 티어 추가</span>
+        <button class="modal-close" onclick="closeAddTierModal()">✕</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">티어 이름 (라벨)</label>
+        <input type="text" class="form-input" id="new-tier-label" placeholder="예: S+, A, 최우수 등" value="NEW">
+      </div>
+      <div class="form-group">
+        <label class="form-label">티어 색상 선택</label>
+        <div class="color-palette" id="color-palette">
+          <div class="color-swatch selected" style="background: #ff7f7f;" onclick="selectColor('#ff7f7f', this)"></div>
+          <div class="color-swatch" style="background: #ffbf7f;" onclick="selectColor('#ffbf7f', this)"></div>
+          <div class="color-swatch" style="background: #ffdf7f;" onclick="selectColor('#ffdf7f', this)"></div>
+          <div class="color-swatch" style="background: #ffff7f;" onclick="selectColor('#ffff7f', this)"></div>
+          <div class="color-swatch" style="background: #bfff7f;" onclick="selectColor('#bfff7f', this)"></div>
+          <div class="color-swatch" style="background: #7fff7f;" onclick="selectColor('#7fff7f', this)"></div>
+          <div class="color-swatch" style="background: #7fffff;" onclick="selectColor('#7fffff', this)"></div>
+          <div class="color-swatch" style="background: #7fbfff;" onclick="selectColor('#7fbfff', this)"></div>
+          <div class="color-swatch" style="background: #bf7fff;" onclick="selectColor('#bf7fff', this)"></div>
+          <div class="color-swatch" style="background: #ff7fbf;" onclick="selectColor('#ff7fbf', this)"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">추가할 위치</label>
+        <select class="form-input" id="new-tier-position">
+          <option value="top">맨 위에 추가 (최상위)</option>
+          <option value="bottom" selected>맨 아래에 추가</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeAddTierModal()">취소</button>
+        <button class="btn btn-primary" onclick="confirmAddTier()">추가하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK MOVE MENU -->
+  <div class="quick-menu" id="quick-menu">
+    <div class="quick-menu-title" id="quick-menu-univ-name">대학 이동</div>
+    <div id="quick-menu-options"></div>
+  </div>
+
+  <!-- TOOLTIP -->
+  <div class="custom-tooltip" id="card-tooltip">
+    <div class="tt-header">
+      <span class="tt-name" id="tt-name">대학명</span>
+      <span class="tt-badge" id="tt-type">구분</span>
+    </div>
+    <div class="tt-desc" id="tt-eng">공학/특성화 강점</div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast-msg">알림 메시지</div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>전국 222개 4년제 대학교 완전 수록 • 교육부 공시 및 대학알리미 기준 4년제 일반/특수목적 대학 총망라</p>
+    <p style="margin-top: 4px; color: #475569;">
+      ※ 예시 티어표는 수능 입시결과를 완전히 배제하고 산학협력 연구비, 특허, 교원 연구실적, 글로벌 공학평가 등의 객관적 데이터를 종합 분석한 참고용 모델입니다.
+    </p>
+  </footer>
+
+  <script>
+    // DATA INJECTION
+    const UNIVERSITIES = [{"id": "snu", "name": "서울대학교", "short": "서울대", "region": "서울", "type": "국립", "color": "#0F0F70", "eng": "국내 최고 공학연구, 반도체·AI·바이오 전분야 세계적 연구역량", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/05/%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EA%B5%90.svg"}, {"id": "yonsei", "name": "연세대학교", "short": "연세대", "region": "서울", "type": "사립", "color": "#003876", "eng": "시스템반도체·인공지능·디스플레이 글로벌 산학연계 및 대형 연구단", "logo": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Yonsei_University_Logo.png"}, {"id": "korea", "name": "고려대학교", "short": "고려대", "region": "서울", "type": "사립", "color": "#862633", "eng": "차세대통신·사이버국방·배터리공학 및 BK21 최상위 연구실적", "logo": "https://upload.wikimedia.org/wikipedia/commons/8/87/Korea_University_Emblem.svg"}, {"id": "sogang", "name": "서강대학교", "short": "서강대", "region": "서울", "type": "사립", "color": "#B00020", "eng": "전자공학·컴퓨터공학 전통 강호, 시스템반도체공학 집중 육성", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Sogang_University_Emblem.svg"}, {"id": "skku", "name": "성균관대학교", "short": "성균관대", "region": "서울/경기", "type": "사립", "color": "#003625", "eng": "삼성전자 파트너십, 반도체시스템공학·SW융합·나노공학 국내 최고수준 투자", "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Sungkyunkwan_University_seal.svg"}, {"id": "skku_sci", "name": "성균관대학교(자연과학)", "short": "성균관대(자연)", "region": "경기", "type": "사립", "color": "#003625", "eng": "수원 소재 공과대학·SW융합대학·정보통신대학, 삼성전자 연구벨트", "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Sungkyunkwan_University_seal.svg"}, {"id": "hanyang", "name": "한양대학교", "short": "한양대", "region": "서울", "type": "사립", "color": "#0E4194", "eng": "'공학한양' 브랜드, 기계·미래자동차·컴퓨터·건축 등 산업계 최다 동문 배출", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/36/Hanyang_University_Seal.svg"}, {"id": "cau", "name": "중앙대학교", "short": "중앙대", "region": "서울", "type": "사립", "color": "#00468C", "eng": "AI·소프트웨어·첨단소재공학 특성화, 대규모 ICT 융복합 연구단", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/33/Chung-Ang_University_Emblem.svg"}, {"id": "khu", "name": "경희대학교", "short": "경희대", "region": "서울/경기", "type": "사립", "color": "#9D2235", "eng": "전자정보·우주과학·원자력·의공학 융복합 클러스터 구축", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/90/Kyung_Hee_University_Emblem.svg"}, {"id": "hufs", "name": "한국외국어대학교", "short": "한국외대", "region": "서울/경기", "type": "사립", "color": "#002C6C", "eng": "AI융합·언어공학·데이터사이언스 신설 및 글로벌 공학 역량 강화", "logo": "https://upload.wikimedia.org/wikipedia/commons/2/29/Hankuk_University_of_Foreign_Studies_Emblem.svg"}, {"id": "uos", "name": "서울시립대학교", "short": "서울시립대", "region": "서울", "type": "공립", "color": "#002E66", "eng": "도시공학·교통·환경·건축 국내 독보적 특성화 및 IT/전자 집중", "logo": "https://upload.wikimedia.org/wikipedia/commons/a/af/University_of_Seoul_Emblem.svg"}, {"id": "ewha", "name": "이화여자대학교", "short": "이화여대", "region": "서울", "type": "사립", "color": "#00462A", "eng": "엘텍공과대학, 소프트웨어·컴퓨터·차세대의과학·화학신소재 특성화", "logo": "https://upload.wikimedia.org/wikipedia/commons/5/52/Ewha_Womans_University_Emblem.svg"}, {"id": "konkuk", "name": "건국대학교", "short": "건국대", "region": "서울", "type": "사립", "color": "#004C28", "eng": "KU융합과학기술원, 항공우주정보시스템·스마트ICT·미래에너지", "logo": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Konkuk_University_Emblem.svg"}, {"id": "dongguk", "name": "동국대학교", "short": "동국대", "region": "서울", "type": "사립", "color": "#EB6800", "eng": "AI소프트웨어·로봇·컴퓨터·바이오메디컬공학 특성화", "logo": "https://upload.wikimedia.org/wikipedia/commons/6/66/Dongguk_University_Emblem.svg"}, {"id": "hongik", "name": "홍익대학교", "short": "홍익대", "region": "서울", "type": "사립", "color": "#002855", "eng": "건축·도시·전자전기·디자인엔지니어링 국내 최정상 융합역량", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Hongik_University_Emblem.svg"}, {"id": "kookmin", "name": "국민대학교", "short": "국민대", "region": "서울", "type": "사립", "color": "#00396B", "eng": "자동차융합대학 국내 1위권 독보적 위상, 소프트웨어 및 지능형반도체", "logo": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Kookmin_University_Emblem.svg"}, {"id": "soongsil", "name": "숭실대학교", "short": "숭실대", "region": "서울", "type": "사립", "color": "#005596", "eng": "국내 최초 전자계산학과 모태, AI·컴퓨터학부·IT융합 전통 명문", "logo": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Soongsil_University_Emblem.svg"}, {"id": "sejong", "name": "세종대학교", "short": "세종대", "region": "서울", "type": "사립", "color": "#C3002F", "eng": "소프트웨어융합·지능기전·인공지능·항공우주공학 집중 육성 및 논문 피인용 최상위", "logo": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Sejong_University_Emblem.svg"}, {"id": "kwangwoon", "name": "광운대학교", "short": "광운대", "region": "서울", "type": "사립", "color": "#8B0029", "eng": "국내 최초 전자공학 태동지, ICT·로봇·전자통신·반도체 특화 명문", "logo": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Kwangwoon_University_Emblem.svg"}, {"id": "seoultech", "name": "서울과학기술대학교", "short": "서울과기대", "region": "서울", "type": "국립", "color": "#1C3F95", "eng": "수도권 대형 국립공대, 지능형반도체·인공지능응용·정밀화학·기계자동차", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/9f/SeoulTech_Emblem.svg"}, {"id": "sookmyung", "name": "숙명여자대학교", "short": "숙명여대", "region": "서울", "type": "사립", "color": "#002B49", "eng": "ICT융합공학부, 첨단소재·바이오·소프트웨어 여성 공학인재 양성", "logo": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Sookmyung_Women%27s_University_Emblem.svg"}, {"id": "mju", "name": "명지대학교", "short": "명지대", "region": "서울/경기", "type": "사립", "color": "#0A2540", "eng": "자연캠퍼스 대규모 공과대학, 반도체·토목·전기전자·화공 전통", "logo": ""}, {"id": "mju_sci", "name": "명지대학교(자연)", "short": "명지대(자연)", "region": "경기", "type": "사립", "color": "#0A2540", "eng": "용인 소재 공과대학·ICT융합대학, 반도체·전자·토목 전통", "logo": ""}, {"id": "smu", "name": "상명대학교", "short": "상명대", "region": "서울/충남", "type": "사립", "color": "#003876", "eng": "SW중심대학, 애니메이션/컴퓨터융합, 천안 스마트정보통신", "logo": ""}, {"id": "catholic", "name": "가톨릭대학교", "short": "가톨릭대", "region": "서울/경기", "type": "사립", "color": "#003F7A", "eng": "바이오메디컬엔지니어링, 인공지능, 정보통신전자공학", "logo": ""}, {"id": "sungshin", "name": "성신여자대학교", "short": "성신여대", "region": "서울", "type": "사립", "color": "#7B1113", "eng": "지식서비스공과대학, AI융합, 바이오헬스케어융합", "logo": ""}, {"id": "dongduk", "name": "동덕여자대학교", "short": "동덕여대", "region": "서울", "type": "사립", "color": "#8B1735", "eng": "ICT융합학부, 정보통계학, 컴퓨터공학", "logo": ""}, {"id": "duksung", "name": "덕성여자대학교", "short": "덕성여대", "region": "서울", "type": "사립", "color": "#9B1923", "eng": "IT미디어공학, 소프트웨어, 컴퓨터공학", "logo": ""}, {"id": "swu", "name": "서울여자대학교", "short": "서울여대", "region": "서울", "type": "사립", "color": "#E65100", "eng": "정보보호학부 국내 최초 설립, 소프트웨어 중심 교육", "logo": ""}, {"id": "sahmyook", "name": "삼육대학교", "short": "삼육대", "region": "서울", "type": "사립", "color": "#003B71", "eng": "컴퓨터학부, 인공지능융합학부, 지능정보보호", "logo": ""}, {"id": "seokyeong", "name": "서경대학교", "short": "서경대", "region": "서울", "type": "사립", "color": "#004B87", "eng": "소프트웨어, 전자컴퓨터공학, 나노화학생명공학", "logo": ""}, {"id": "hansung", "name": "한성대학교", "short": "한성대", "region": "서울", "type": "사립", "color": "#003366", "eng": "IT공과대학, 스마트경영공학, 컴퓨터소프트웨어", "logo": ""}, {"id": "skhu", "name": "성공회대학교", "short": "성공회대", "region": "서울", "type": "사립", "color": "#1E4D2B", "eng": "소프트웨어융합학부, 인공지능전공", "logo": ""}, {"id": "karts", "name": "한국예술종합학교", "short": "한예종", "region": "서울", "type": "국립", "color": "#231F20", "eng": "국가 주도 전문 예술인 및 미디어아트·영상공학 양성", "logo": ""}, {"id": "knsu", "name": "한국체육대학교", "short": "한체대", "region": "서울", "type": "국립", "color": "#002B49", "eng": "국가대표 스포츠과학 및 운동생체역학 특화", "logo": ""}, {"id": "snue", "name": "서울교육대학교", "short": "서울교대", "region": "서울", "type": "교육대", "color": "#003B70", "eng": "초등교원 양성 국립 교육대학", "logo": ""}, {"id": "kma", "name": "육군사관학교", "short": "육사", "region": "서울", "type": "특수목적", "color": "#1E4D2B", "eng": "정예 육군장교 육성, 군사학·시스템공학·사이버전", "logo": ""}, {"id": "kbu", "name": "한국방송통신대학교", "short": "방통대", "region": "서울", "type": "국립", "color": "#003876", "eng": "국립 원격 고등교육기관, 컴퓨터과학 및 정보통계", "logo": ""}, {"id": "bible", "name": "한국성서대학교", "short": "한국성서대", "region": "서울", "type": "사립", "color": "#003366", "eng": "컴퓨터소프트웨어, 간호, 사회복지 특화", "logo": ""}, {"id": "gangseo", "name": "강서대학교", "short": "강서대", "region": "서울", "type": "사립", "color": "#00483A", "eng": "보건복지 및 컴퓨터소프트웨어 특화", "logo": ""}, {"id": "hanyoung", "name": "서울한영대학교", "short": "서울한영대", "region": "서울", "type": "사립", "color": "#1D3B58", "eng": "재활복지 및 신학 전문 특화", "logo": ""}, {"id": "kcu", "name": "서울기독대학교", "short": "서울기독대", "region": "서울", "type": "사립", "color": "#2B4C7E", "eng": "사회복지 및 기독교 신학 특화", "logo": ""}, {"id": "mtu", "name": "감리교신학대학교", "short": "감신대", "region": "서울", "type": "사립", "color": "#7A1C20", "eng": "전통 신학 및 교역자 양성 중심 특화", "logo": ""}, {"id": "puts", "name": "장로회신학대학교", "short": "장신대", "region": "서울", "type": "사립", "color": "#1B365D", "eng": "기독교 신학 교육 및 연구 중심 특화", "logo": ""}, {"id": "chongshin", "name": "총신대학교", "short": "총신대", "region": "서울", "type": "사립", "color": "#0C2340", "eng": "기독교 교단 신학 및 종교 연구 중심 특화", "logo": ""}, {"id": "chugye", "name": "추계예술대학교", "short": "추계예대", "region": "서울", "type": "사립", "color": "#582C83", "eng": "순수 예술 및 문화예술콘텐츠 특화", "logo": ""}, {"id": "inha", "name": "인하대학교", "short": "인하대", "region": "인천", "type": "사립", "color": "#003876", "eng": "한진 재단 기반 기계·항공우주·화공·고분자·조선 전통의 공학 명문", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Inha_University_Emblem.svg"}, {"id": "ajou", "name": "아주대학교", "short": "아주대", "region": "경기", "type": "사립", "color": "#002D62", "eng": "대우 학풍 이래 기계·전자·소프트웨어·사이버보안·교통공학 강호", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/07/Ajou_University_Emblem.svg"}, {"id": "erica", "name": "한양대학교 ERICA", "short": "한양대 ERICA", "region": "경기", "type": "사립", "color": "#0E4194", "eng": "국내 최고 수준 학연산 클러스터, 카카오 데이터센터·국책연구소 연계 공학", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/36/Hanyang_University_Seal.svg"}, {"id": "kau", "name": "한국항공대학교", "short": "한국항공대", "region": "경기", "type": "사립", "color": "#002856", "eng": "국내 유일 항공우주 특화 대학, 비행체설계·항공전자·무인기 독보적", "logo": "https://upload.wikimedia.org/wikipedia/commons/5/52/Korea_Aerospace_University_Emblem.svg"}, {"id": "tukorea", "name": "한국공학대학교", "short": "한국공학대", "region": "경기", "type": "사립", "color": "#004B8D", "eng": "구 한국산업기술대, 시흥스마트허브 중심 메카트로닉스·스마트제조·SW 산학일체", "logo": ""}, {"id": "gachon", "name": "가천대학교", "short": "가천대", "region": "경기/인천", "type": "사립", "color": "#003A70", "eng": "국내 최초 인공지능(AI)학과 신설, 배터리·반도체·의공학 대규모 투자", "logo": ""}, {"id": "dankook", "name": "단국대학교", "short": "단국대", "region": "경기", "type": "사립", "color": "#002F6C", "eng": "죽전캠퍼스 IT/반도체·소프트웨어·토목환경, 판교 테크노밸리 산학협력", "logo": ""}, {"id": "kyonggi", "name": "경기대학교", "short": "경기대", "region": "경기", "type": "사립", "color": "#003B71", "eng": "스마트팩토리, 지능정보보호, 건축공학, 컴퓨터SW", "logo": ""}, {"id": "inu", "name": "인천대학교", "short": "인천대", "region": "인천", "type": "국립", "color": "#003478", "eng": "송도 바이오클러스터 연계 국립대, 바이오공학·로봇·스마트시티공학", "logo": ""}, {"id": "hufs_global", "name": "한국외국어대학교(글로벌)", "short": "한국외대(글로벌)", "region": "경기", "type": "사립", "color": "#002C6C", "eng": "용인 소재 공과대학, 전자·정보통신·반도체전자·컴퓨터공학", "logo": ""}, {"id": "khu_intl", "name": "경희대학교(국제)", "short": "경희대(국제)", "region": "경기", "type": "사립", "color": "#9D2235", "eng": "공과대학·전자정보대학·SW융합대학 본거지, 삼성/기흥 반도체 인접", "logo": ""}, {"id": "cau_davinci", "name": "중앙대학교 다빈치", "short": "중앙대 다빈치", "region": "경기", "type": "사립", "color": "#00468C", "eng": "안성캠퍼스 생명공학·식품공학·시스템생명공학 특성화", "logo": ""}, {"id": "hknu", "name": "한경국립대학교", "short": "한경국립대", "region": "경기", "type": "국립", "color": "#003E7E", "eng": "경기 유일 국립종합대, IT농축산 스마트팜·화학공학·토목환경", "logo": ""}, {"id": "suwon", "name": "수원대학교", "short": "수원대", "region": "경기", "type": "사립", "color": "#8B1E3F", "eng": "ICT융합대학, 반도체에너지공학, 미래모빌리티연구", "logo": ""}, {"id": "kangnam", "name": "강남대학교", "short": "강남대", "region": "경기", "type": "사립", "color": "#004B87", "eng": "ICT융합공학부, 인공지능·VR·소프트웨어", "logo": ""}, {"id": "sungkyul", "name": "성결대학교", "short": "성결대", "region": "경기", "type": "사립", "color": "#003366", "eng": "차세대미디어, 컴퓨터공학, 정보통신공학", "logo": ""}, {"id": "anyang", "name": "안양대학교", "short": "안양대", "region": "경기", "type": "사립", "color": "#005596", "eng": "스마트시티공학, 소프트웨어, 화장품발명디자인", "logo": ""}, {"id": "hanshin", "name": "한신대학교", "short": "한신대", "region": "경기", "type": "사립", "color": "#9B1A24", "eng": "AI빅데이터, 소프트웨어융합, IT콘텐츠", "logo": ""}, {"id": "pyeongtaek", "name": "평택대학교", "short": "평택대", "region": "경기", "type": "사립", "color": "#003A70", "eng": "스마트모빌리티, 스마트물류, IT공과계열", "logo": ""}, {"id": "daejin", "name": "대진대학교", "short": "대진대", "region": "경기", "type": "사립", "color": "#002D62", "eng": "AI기계공학, 신소재공학, 컴퓨터소프트웨어", "logo": ""}, {"id": "shinhan", "name": "신한대학교", "short": "신한대", "region": "경기", "type": "사립", "color": "#003E7E", "eng": "모빌리티공학, 바이오메디컬, 컴퓨터공학", "logo": ""}, {"id": "cha", "name": "차의과학대학교", "short": "차의과학대", "region": "경기", "type": "사립", "color": "#00529B", "eng": "바이오공학, 의료정보학, 줄기세포의과학 특화", "logo": ""}, {"id": "eulji", "name": "을지대학교", "short": "을지대", "region": "경기/대전", "type": "사립", "color": "#003478", "eng": "의공학, 의료IT마케팅, 방사선/바이오메디컬", "logo": ""}, {"id": "yongin", "name": "용인대학교", "short": "용인대", "region": "경기", "type": "사립", "color": "#003876", "eng": "AI융합, 물리치료, 경호/스포츠과학 특성화", "logo": ""}, {"id": "hansei", "name": "한세대학교", "short": "한세대", "region": "경기", "type": "사립", "color": "#1C3F95", "eng": "ICT융합, 컴퓨터소프트웨어, 시각정보디자인", "logo": ""}, {"id": "hyupsung", "name": "협성대학교", "short": "협성대", "region": "경기", "type": "사립", "color": "#003B70", "eng": "소프트웨어, 스마트모빌리티공학, 건축공학", "logo": ""}, {"id": "hsus", "name": "화성의과학대학교", "short": "화성의과학대", "region": "경기", "type": "사립", "color": "#1C3F95", "eng": "바이오헬스케어, 간호보건 특성화", "logo": ""}, {"id": "ginue", "name": "경인교육대학교", "short": "경인교대", "region": "인천/경기", "type": "교육대", "color": "#003876", "eng": "수도권 최대 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "icatholic", "name": "인천가톨릭대학교", "short": "인천가톨릭대", "region": "인천", "type": "사립", "color": "#003876", "eng": "바이오융합디자인, 간호, 문화예술 특화", "logo": ""}, {"id": "suwon_catholic", "name": "수원가톨릭대학교", "short": "수원가톨릭대", "region": "경기", "type": "사립", "color": "#7A1C20", "eng": "천주교 사제 양성 및 신학 연구", "logo": ""}, {"id": "actu", "name": "아신대학교", "short": "아신대", "region": "경기", "type": "사립", "color": "#1E4D2B", "eng": "국제선교 및 복지 상담 특화", "logo": ""}, {"id": "sangha", "name": "중앙승가대학교", "short": "중앙승가대", "region": "경기", "type": "사립", "color": "#8C6239", "eng": "대한불교조계종 전문 승가 교육기관", "logo": ""}, {"id": "calvin", "name": "칼빈대학교", "short": "칼빈대", "region": "경기", "type": "사립", "color": "#003366", "eng": "장로교 개혁주의 신학 교육", "logo": ""}, {"id": "luther", "name": "루터대학교", "short": "루터대", "region": "경기", "type": "사립", "color": "#9D2235", "eng": "루터교 신학 및 휴먼서비스 특화", "logo": ""}, {"id": "stu", "name": "서울신학대학교", "short": "서울신학대", "region": "경기", "type": "사립", "color": "#003366", "eng": "부천 소재 기독교대한성결교회 종합대학", "logo": ""}, {"id": "sjs", "name": "서울장신대학교", "short": "서울장신대", "region": "경기", "type": "사립", "color": "#1B365D", "eng": "광주(경기) 소재 장로교 신학 및 사회복지", "logo": ""}, {"id": "fgtc", "name": "순복음총회신학교", "short": "순복음신학교", "region": "경기", "type": "사립", "color": "#C3002F", "eng": "순복음 교단 신역량 양성 교육", "logo": ""}, {"id": "sunykorea", "name": "한국뉴욕주립대학교", "short": "뉴욕주립대", "region": "인천", "type": "특수목적", "color": "#003876", "eng": "인천 송도 글로벌캠퍼스 스토니브룩 컴퓨터과학/기계공학 학위 수여", "logo": ""}, {"id": "kaist", "name": "한국과학기술원", "short": "KAIST", "region": "대전/세종/충청", "type": "과기원", "color": "#004098", "eng": "국가대표 이공계 연구중심대학, 첨단 신기술·특허·창업 독보적 세계랭킹", "logo": "https://upload.wikimedia.org/wikipedia/en/2/29/KAIST_logo_small.svg"}, {"id": "cnu", "name": "충남대학교", "short": "충남대", "region": "대전/세종/충청", "type": "국립", "color": "#00396B", "eng": "대덕R&D특구 연계 거점국립대, 자율주행·국방ICT·스마트소재공학", "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/Chungnam_National_University_Emblem.svg"}, {"id": "cbnu", "name": "충북대학교", "short": "충북대", "region": "대전/세종/충청", "type": "국립", "color": "#004E38", "eng": "반도체특성화대학원, 오송바이오밸리 연계 의약바이오·전기전자공학", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Chungbuk_National_University_Emblem.svg"}, {"id": "koreatech", "name": "한국기술교육대학교", "short": "한기대", "region": "대전/세종/충청", "type": "사립", "color": "#003366", "eng": "고용노동부 지원 실습위주 100% 공학교육, 전국 최상위 취업률 및 스마트제조", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e0/KoreaTech_Emblem.svg"}, {"id": "kongju", "name": "국립공주대학교", "short": "국립공주대", "region": "대전/세종/충청", "type": "국립", "color": "#003366", "eng": "천안공과대학 대규모 산학협력, 디스플레이·기계자동차·금형소재", "logo": ""}, {"id": "hanbat", "name": "국립한밭대학교", "short": "국립한밭대", "region": "대전/세종/충청", "type": "국립", "color": "#003E7E", "eng": "산학일체형 국립공대, 지능형기계·화학생명공학·정보통신네트워크", "logo": ""}, {"id": "ut", "name": "국립한국교통대학교", "short": "한국교통대", "region": "대전/세종/충청", "type": "국립", "color": "#003876", "eng": "국내 유일 교통/철도 특성화 국립대, 철도차량·항공·에너지신소재", "logo": ""}, {"id": "korea_sejong", "name": "고려대학교 세종", "short": "고려대(세종)", "region": "대전/세종/충청", "type": "사립", "color": "#862633", "eng": "과학기술대학, 가속기과학·디스플레이반도체·인공지능사이버보안", "logo": ""}, {"id": "hongik_sejong", "name": "홍익대학교 세종", "short": "홍익대(세종)", "region": "대전/세종/충청", "type": "사립", "color": "#002855", "eng": "과학기술대학, 소프트웨어융합·자율주행 스마트모빌리티·재료공학", "logo": ""}, {"id": "konkuk_glocal", "name": "건국대학교 GLOCAL", "short": "건국대(글로컬)", "region": "대전/세종/충청", "type": "사립", "color": "#004C28", "eng": "충주캠퍼스 융합기술대학, 바이오헬스·친환경에너지·소프트웨어", "logo": ""}, {"id": "dankook_cheonan", "name": "단국대학교(천안)", "short": "단국대(천안)", "region": "대전/세종/충청", "type": "사립", "color": "#002F6C", "eng": "BT/바이오·원자력융합·제약·의과학 특성화 클러스터", "logo": ""}, {"id": "smu_cheonan", "name": "상명대학교(천안)", "short": "상명대(천안)", "region": "대전/세종/충청", "type": "사립", "color": "#003876", "eng": "스마트정보통신공학, 지능IoT, 그린화학공학", "logo": ""}, {"id": "hannam", "name": "한남대학교", "short": "한남대", "region": "대전/세종/충청", "type": "사립", "color": "#002B49", "eng": "대전 대덕밸리 캠퍼스 바이오나노, 컴퓨터통신·기계공학", "logo": ""}, {"id": "hoseo", "name": "호서대학교", "short": "호서대", "region": "대전/세종/충청", "type": "사립", "color": "#9D2235", "eng": "벤처정신 기반 디스플레이·반도체공학·미래자동차·AI 특성화", "logo": ""}, {"id": "sunmoon", "name": "선문대학교", "short": "선문대", "region": "대전/세종/충청", "type": "사립", "color": "#003876", "eng": "SW중심대학, 미래자동차학부, 정보통신·스마트기계", "logo": ""}, {"id": "sch", "name": "순천향대학교", "short": "순천향대", "region": "대전/세종/충청", "type": "사립", "color": "#005596", "eng": "의료바이오·의용공학·사이버보안·소프트웨어융합 특성화", "logo": ""}, {"id": "pcu", "name": "배재대학교", "short": "배재대", "region": "대전/세종/충청", "type": "사립", "color": "#003366", "eng": "AI·SW공학부, 바이오의약, 나노신소재", "logo": ""}, {"id": "mokwon", "name": "목원대학교", "short": "목원대", "region": "대전/세종/충청", "type": "사립", "color": "#B00020", "eng": "ICT융합학부, 컴퓨터공학, 화학소재", "logo": ""}, {"id": "dju", "name": "대전대학교", "short": "대전대", "region": "대전/세종/충청", "type": "사립", "color": "#002855", "eng": "디지털미래융합, 바이오헬스, 소프트웨어", "logo": ""}, {"id": "woosong", "name": "우송대학교", "short": "우송대", "region": "대전/세종/충청", "type": "사립", "color": "#003B71", "eng": "철도물류대학 국내 최고 특성화, 솔브릿지 국제경영/IT", "logo": ""}, {"id": "cju", "name": "청주대학교", "short": "청주대", "region": "대전/세종/충청", "type": "사립", "color": "#002855", "eng": "항공모빌리티, 태양광에너지, AI소프트웨어", "logo": ""}, {"id": "seowon", "name": "서원대학교", "short": "서원대", "region": "대전/세종/충청", "type": "사립", "color": "#003E7E", "eng": "IT학부, 융합보안, 식품생명공학", "logo": ""}, {"id": "semyung", "name": "세명대학교", "short": "세명대", "region": "대전/세종/충청", "type": "사립", "color": "#003876", "eng": "스마트IT학부, 한방바이오, 보건바이오", "logo": ""}, {"id": "konyang", "name": "건양대학교", "short": "건양대", "region": "대전/세종/충청", "type": "사립", "color": "#004B8D", "eng": "의공학/의료IT 대전메디컬캠퍼스, 국방경찰/사이버보안 논산캠퍼스", "logo": ""}, {"id": "konyang_med", "name": "건양대학교(메디컬)", "short": "건양대(메디컬)", "region": "대전/세종/충청", "type": "사립", "color": "#004B8D", "eng": "의료공과대학, 의공학·의료소프트웨어·제약생명공학", "logo": ""}, {"id": "fdu", "name": "극동대학교", "short": "극동대", "region": "대전/세종/충청", "type": "사립", "color": "#002D62", "eng": "항공정비·항공IT, 바이오제약", "logo": ""}, {"id": "jwu", "name": "중원대학교", "short": "중원대", "region": "대전/세종/충청", "type": "사립", "color": "#004C28", "eng": "항공·기계·스마트IT·의료보건", "logo": ""}, {"id": "u1", "name": "유원대학교", "short": "유원대", "region": "대전/세종/충청", "type": "사립", "color": "#1C3F95", "eng": "반도체·스마트모빌리티, 경찰보안", "logo": ""}, {"id": "nsu", "name": "남서울대학교", "short": "남서울대", "region": "대전/세종/충청", "type": "사립", "color": "#003366", "eng": "가상증강현실(VR/AR), 융합소프트웨어, 전자공학", "logo": ""}, {"id": "kornu", "name": "나사렛대학교", "short": "나사렛대", "region": "대전/세종/충청", "type": "사립", "color": "#8B1E3F", "eng": "재활공학 특성화, AI인공지능, 컴퓨터공학", "logo": ""}, {"id": "bu", "name": "백석대학교", "short": "백석대", "region": "대전/세종/충청", "type": "사립", "color": "#002F6C", "eng": "컴퓨터소프트웨어, ICT학부, 첨단스마트보건", "logo": ""}, {"id": "knue", "name": "한국교원대학교", "short": "한국교원대", "region": "대전/세종/충청", "type": "국립", "color": "#003366", "eng": "국내 유일 종합 교원양성 특수목적 국립대", "logo": ""}, {"id": "gjue", "name": "공주교육대학교", "short": "공주교대", "region": "대전/세종/충청", "type": "교육대", "color": "#003E7E", "eng": "충청권 대표 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "cje", "name": "청주교육대학교", "short": "청주교대", "region": "대전/세종/충청", "type": "교육대", "color": "#003478", "eng": "충북권 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "nuch", "name": "한국전통문화대학교", "short": "전통문화대", "region": "대전/세종/충청", "type": "국립", "color": "#8C6239", "eng": "국가유산청 산하 문화유산과학·수리복원공학 특화", "logo": ""}, {"id": "kndu", "name": "국방대학교", "short": "국방대", "region": "대전/세종/충청", "type": "특수목적", "color": "#002855", "eng": "국방안보 및 국방과학기술 고등교육 연구기관", "logo": ""}, {"id": "knpa", "name": "경찰대학", "short": "경찰대", "region": "대전/세종/충청", "type": "특수목적", "color": "#002E66", "eng": "치안인재 양성, 경찰학·법학·경찰수사공학", "logo": ""}, {"id": "afa", "name": "공군사관학교", "short": "공사", "region": "대전/세종/충청", "type": "특수목적", "color": "#003876", "eng": "항공우주 정예장교, 항공우주공학·전자통신", "logo": ""}, {"id": "afna", "name": "국군간호사관학교", "short": "국간사", "region": "대전/세종/충청", "type": "특수목적", "color": "#8B1E3F", "eng": "군 전문 간호장교 및 재난외상의료 교육", "logo": ""}, {"id": "chungwoon", "name": "청운대학교", "short": "청운대", "region": "대전/세종/충청", "type": "산업대", "color": "#003366", "eng": "홍성/인천 캠퍼스 방송영상·건축소프트웨어 특화", "logo": ""}, {"id": "kbtc", "name": "한국침례신학대학교", "short": "침신대", "region": "대전/세종/충청", "type": "사립", "color": "#002855", "eng": "침례교 교단 신학 및 기독교 교육", "logo": ""}, {"id": "dcatholic", "name": "대전가톨릭대학교", "short": "대전가톨릭대", "region": "대전/세종/충청", "type": "사립", "color": "#7A1C20", "eng": "천주교 대전교구 사제 양성", "logo": ""}, {"id": "djs", "name": "대전신학대학교", "short": "대전신학대", "region": "대전/세종/충청", "type": "사립", "color": "#003366", "eng": "기독교 신학 교육 및 연구", "logo": ""}, {"id": "ggu", "name": "금강대학교", "short": "금강대", "region": "대전/세종/충청", "type": "사립", "color": "#8C6239", "eng": "천태종 설립 소수정예 공공인재 및 불교학", "logo": ""}, {"id": "joongbu", "name": "중부대학교", "short": "중부대", "region": "대전/세종/충청", "type": "사립", "color": "#002855", "eng": "충남 금산 / 고양 캠퍼스 정보보호·항공서비스·자동차", "logo": ""}, {"id": "hanseo", "name": "한서대학교", "short": "한서대", "region": "대전/세종/충청", "type": "사립", "color": "#003876", "eng": "태안비행장 보유 아시아 최고 수준 항공특성화(운항/교통/정비)", "logo": ""}, {"id": "postech", "name": "포항공과대학교", "short": "포스텍", "region": "대구/경북", "type": "사립", "color": "#C80150", "eng": "세계적 연구중심 공과대학, 첨단 나노소재·가속기·바이오", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/00/POSTECH_emblem.svg"}, {"id": "dgist", "name": "대구경북과학기술원", "short": "DGIST", "region": "대구/경북", "type": "과기원", "color": "#004B8D", "eng": "뇌인지과학·로봇공학·지능형센서·뉴바이올로지 특화 이공계 연구", "logo": ""}, {"id": "knu", "name": "경북대학교", "short": "경북대", "region": "대구/경북", "type": "국립", "color": "#D32F2F", "eng": "국내 최고 거점국립 공학 메카, 전자·컴퓨터·반도체·모빌리티·화공", "logo": "https://upload.wikimedia.org/wikipedia/commons/8/87/Kyungpook_National_University_Emblem.svg"}, {"id": "yu", "name": "영남대학교", "short": "영남대", "region": "대구/경북", "type": "사립", "color": "#003876", "eng": "영남권 대표 대형 사립공대, 기계·자동차·전기전자·화학공학 대규모 동문", "logo": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Yeungnam_University_Emblem.svg"}, {"id": "kumoh", "name": "국립금오공과대학교", "short": "금오공대", "region": "대구/경북", "type": "국립", "color": "#002855", "eng": "박정희 전 대통령 설립 국립공대, 구미산단 연계 전자·스마트기계·신소재 특성화", "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Kumoh_National_Institute_of_Technology_Emblem.svg"}, {"id": "andong", "name": "국립안동대학교", "short": "안동대", "region": "대구/경북", "type": "국립", "color": "#003876", "eng": "경북 북부 국립 거점, 바이오백신·스마트농업기계·컴퓨터공학", "logo": ""}, {"id": "kmu", "name": "계명대학교", "short": "계명대", "region": "대구/경북", "type": "사립", "color": "#003366", "eng": "대구 성서산단 연계 기계자동차·지능형로봇·게임모바일공학", "logo": ""}, {"id": "daegu", "name": "대구대학교", "short": "대구대", "region": "대구/경북", "type": "사립", "color": "#004B8D", "eng": "정보통신·소프트웨어·재활공학 특성화 및 대형 이공계 인프라", "logo": ""}, {"id": "cu", "name": "대구가톨릭대학교", "short": "대가대", "region": "대구/경북", "type": "사립", "color": "#003366", "eng": "바이오메디·소프트웨어·반도체전자·기계공학", "logo": ""}, {"id": "handong", "name": "한동대학교", "short": "한동대", "region": "대구/경북", "type": "사립", "color": "#002855", "eng": "전공자유선택제, 기계제어·전산전자·글로벌창의ICT 혁신교육", "logo": ""}, {"id": "dongguk_wise", "name": "동국대학교 WISE", "short": "동국대(WISE)", "region": "대구/경북", "type": "사립", "color": "#EB6800", "eng": "경주 소재, 원자력·에너지환경·스마트자동차·보건의료", "logo": ""}, {"id": "kiu", "name": "경일대학교", "short": "경일대", "region": "대구/경북", "type": "사립", "color": "#8B0029", "eng": "자율주행 모빌리티, 소방방재, 드론/철도융합", "logo": ""}, {"id": "dhu", "name": "대구한의대학교", "short": "대구한의대", "region": "대구/경북", "type": "사립", "color": "#004E38", "eng": "K-뷰티 화장품공학, 한방바이오융합", "logo": ""}, {"id": "kyungwoon", "name": "경운대학교", "short": "경운대", "region": "대구/경북", "type": "사립", "color": "#003366", "eng": "항공운항·항공기계정비·무인기 영남권 항공특성화", "logo": ""}, {"id": "dyu", "name": "동양대학교", "short": "동양대", "region": "대구/경북", "type": "사립", "color": "#002855", "eng": "영주 철도사관학교(철도운전·토목) 및 동두천 AI/게임공학", "logo": ""}, {"id": "uu", "name": "위덕대학교", "short": "위덕대", "region": "대구/경북", "type": "사립", "color": "#8C6239", "eng": "포항/경주 산단 연계 에너지전기·철강신소재", "logo": ""}, {"id": "gimcheon", "name": "김천대학교", "short": "김천대", "region": "대구/경북", "type": "사립", "color": "#003876", "eng": "임상보건 및 스마트모빌리티", "logo": ""}, {"id": "skju", "name": "신경주대학교", "short": "신경주대", "region": "대구/경북", "type": "사립", "color": "#004B8D", "eng": "구 경주대+서라벌대 통합, 원자력방재·스마트관광", "logo": ""}, {"id": "dnue", "name": "대구교육대학교", "short": "대구교대", "region": "대구/경북", "type": "교육대", "color": "#003876", "eng": "대구경북 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "daegu_arts", "name": "대구예술대학교", "short": "대구예대", "region": "대구/경북", "type": "사립", "color": "#7B1113", "eng": "예술종합 및 실용예술콘텐츠 특화", "logo": ""}, {"id": "daeshin", "name": "대신대학교", "short": "대신대", "region": "대구/경북", "type": "사립", "color": "#003366", "eng": "영남지역 기독교 장로회 신학 교육", "logo": ""}, {"id": "ytus", "name": "영남신학대학교", "short": "영남신학대", "region": "대구/경북", "type": "사립", "color": "#1B365D", "eng": "기독교 신학 및 사회복지 특화", "logo": ""}, {"id": "kaay", "name": "육군3사관학교", "short": "육군3사관", "region": "대구/경북", "type": "특수목적", "color": "#1E4D2B", "eng": "육군 초급장교 양성 및 군사공학 교육", "logo": ""}, {"id": "unist", "name": "울산과학기술원", "short": "UNIST", "region": "부산/울산/경남", "type": "과기원", "color": "#002B49", "eng": "이차전지·배터리·첨단에너지·신소재 세계 최정상급 연구역량 및 벤처창업", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/UNIST_Logo.svg"}, {"id": "pnu", "name": "부산대학교", "short": "부산대", "region": "부산/울산/경남", "type": "국립", "color": "#003B71", "eng": "동남권 최고 거점국립 공대, 기계·조선해양·화공·원자력·전자 전국 최강급", "logo": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Pusan_National_University_Emblem.svg"}, {"id": "pknu", "name": "국립부경대학교", "short": "부경대", "region": "부산/울산/경남", "type": "국립", "color": "#002855", "eng": "해양공학·수산과학·화학공학·나노융합·환경IT 특화 대형 국립공대", "logo": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Pukyong_National_University_Emblem.svg"}, {"id": "kmou", "name": "국립한국해양대학교", "short": "한국해양대", "region": "부산/울산/경남", "type": "국립", "color": "#003876", "eng": "국내 독보적 해양특성화 국립대, 해사수송·해양플랜트·조선·항만공학", "logo": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Korea_Maritime_and_Ocean_University_Emblem.svg"}, {"id": "cwnu", "name": "국립창원대학교", "short": "창원대", "region": "부산/울산/경남", "type": "국립", "color": "#004B8D", "eng": "창원 국가산단 중심 스마트기계·방위산업·메카트로닉스 국립 메카", "logo": "https://upload.wikimedia.org/wikipedia/commons/9/90/Changwon_National_University_Emblem.svg"}, {"id": "gnu", "name": "경상국립대학교", "short": "경상국립대", "region": "부산/울산/경남", "type": "국립", "color": "#003E7E", "eng": "진주/창원 캠퍼스 우주항공공학 국내 1위권 특성화, 나노화학소재", "logo": "https://upload.wikimedia.org/wikipedia/commons/0/07/Gyeongsang_National_University_Emblem.svg"}, {"id": "ulsan", "name": "울산대학교", "short": "울산대", "region": "부산/울산/경남", "type": "사립", "color": "#004B87", "eng": "현대중공업/현대차 전폭적 지원, 조선해양·기계자동차·화학공학 최상위", "logo": ""}, {"id": "donga", "name": "동아대학교", "short": "동아대", "region": "부산/울산/경남", "type": "사립", "color": "#003366", "eng": "부산 전통의 대형 사립공대, 기계·건축토목·신소재·화공 인프라", "logo": ""}, {"id": "inje", "name": "인제대학교", "short": "인제대", "region": "부산/울산/경남", "type": "사립", "color": "#00529B", "eng": "백병원 기반 의공학·바이오헬스·나노공학·소프트웨어 특성화", "logo": ""}, {"id": "deu", "name": "동의대학교", "short": "동의대", "region": "부산/울산/경남", "type": "사립", "color": "#00396B", "eng": "인공지능·ICT기계모빌리티·소방방재·의료공학 특성화", "logo": ""}, {"id": "kyungnam", "name": "경남대학교", "short": "경남대", "region": "부산/울산/경남", "type": "사립", "color": "#002855", "eng": "마산 소재, 스마트제조기계·지능형소프트웨어·나노화학", "logo": ""}, {"id": "ks", "name": "경성대학교", "short": "경성대", "region": "부산/울산/경남", "type": "사립", "color": "#8B0029", "eng": "소프트웨어융합, 미디어IT, 기계메카트로닉스", "logo": ""}, {"id": "dongseo", "name": "동서대학교", "short": "동서대", "region": "부산/울산/경남", "type": "사립", "color": "#B00020", "eng": "소프트웨어중심대학, 컴퓨터AI, 영화영상콘텐츠/IT융합", "logo": ""}, {"id": "tu", "name": "동명대학교", "short": "동명대", "region": "부산/울산/경남", "type": "사립", "color": "#003366", "eng": "동명목재 모태, AI융합기계·자동차·물류IT 특성화", "logo": ""}, {"id": "silla", "name": "신라대학교", "short": "신라대", "region": "부산/울산/경남", "type": "사립", "color": "#004E38", "eng": "항공대학(운항/정비), 지능형반도체소프트웨어", "logo": ""}, {"id": "bufs", "name": "부산외국어대학교", "short": "부산외대", "region": "부산/울산/경남", "type": "사립", "color": "#003876", "eng": "글로벌IT융합, 소프트웨어학부, 어문·데이터사이언스", "logo": ""}, {"id": "cup", "name": "부산가톨릭대학교", "short": "부산가톨릭대", "region": "부산/울산/경남", "type": "사립", "color": "#003F7A", "eng": "소프트웨어, 보건바이오, 환경안전공학", "logo": ""}, {"id": "cs", "name": "창신대학교", "short": "창신대", "region": "부산/울산/경남", "type": "사립", "color": "#002D62", "eng": "부영그룹 인수, 스마트융합, 항공기계", "logo": ""}, {"id": "ysu", "name": "영산대학교", "short": "영산대", "region": "부산/울산/경남", "type": "사립", "color": "#8B1E3F", "eng": "양산/부산 캠퍼스 스마트모빌리티, 인공지능융합", "logo": ""}, {"id": "kosin", "name": "고신대학교", "short": "고신대", "region": "부산/울산/경남", "type": "사립", "color": "#003366", "eng": "의료보건복지 및 기독교 신학 특화", "logo": ""}, {"id": "bnue", "name": "부산교육대학교", "short": "부산교대", "region": "부산/울산/경남", "type": "교육대", "color": "#003B71", "eng": "부산권 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "cue", "name": "진주교육대학교", "short": "진주교대", "region": "부산/울산/경남", "type": "교육대", "color": "#004B8D", "eng": "경남권 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "bpt", "name": "부산장신대학교", "short": "부산장신대", "region": "부산/울산/경남", "type": "사립", "color": "#1B365D", "eng": "영남지역 장로교 신학 교육", "logo": ""}, {"id": "kaya", "name": "가야대학교", "short": "가야대", "region": "부산/울산/경남", "type": "사립", "color": "#003B71", "eng": "김해 소재, 보건의료 및 항만물류", "logo": ""}, {"id": "kna", "name": "해군사관학교", "short": "해사", "region": "부산/울산/경남", "type": "특수목적", "color": "#002855", "eng": "해양안보 정예장교, 조선해양공학·무기체계", "logo": ""}, {"id": "gist", "name": "광주과학기술원", "short": "GIST", "region": "광주/전라", "type": "과기원", "color": "#E65100", "eng": "인공지능(AI)대학원 거점, 초강력레이저·광학·차세대반도체 국가연구", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Gwangju_Institute_of_Science_and_Technology_logo.svg"}, {"id": "kentech", "name": "한국에너지공과대학교", "short": "KENTECH", "region": "광주/전라", "type": "과기원", "color": "#00A859", "eng": "국내 유일 에너지 특화 연구중심대학, 수소에너지·그리드·AI에너지", "logo": ""}, {"id": "jnu", "name": "전남대학교", "short": "전남대", "region": "광주/전라", "type": "국립", "color": "#00462A", "eng": "호남권 최대 거점국립 공대, AI융합·전기전자·에너지화공·기계", "logo": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Chonnam_National_University_Emblem.svg"}, {"id": "jbnu", "name": "전북대학교", "short": "전북대", "region": "광주/전라", "type": "국립", "color": "#003876", "eng": "탄소나노신소재·스마트모빌리티·반도체·농생명에너지 특화 거점국립대", "logo": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Jeonbuk_National_University_Emblem.svg"}, {"id": "mnu", "name": "국립목포대학교", "short": "목포대", "region": "광주/전라", "type": "국립", "color": "#003366", "eng": "대불산단 연계 중소형선박·신재생에너지·해상풍력 특화", "logo": ""}, {"id": "scnu", "name": "국립순천대학교", "short": "순천대", "region": "광주/전라", "type": "국립", "color": "#004E38", "eng": "글로컬대학 지정, 광양제철·여수산단 연계 스마트그린소재공학", "logo": ""}, {"id": "ksnu", "name": "국립군산대학교", "short": "군산대", "region": "광주/전라", "type": "국립", "color": "#003E7E", "eng": "새만금 스마트에너지·신재생풍력·해양조선·IT융합", "logo": ""}, {"id": "mmu", "name": "국립목포해양대학교", "short": "목포해양대", "region": "광주/전라", "type": "국립", "color": "#002855", "eng": "항해/기관 전문 국립대, 해사스마트기술·해양전자통신", "logo": ""}, {"id": "chosun", "name": "조선대학교", "short": "조선대", "region": "광주/전라", "type": "사립", "color": "#00396B", "eng": "호남 대표 대형 사립공과대학, 선박조선·원자력·용접특성화·IT", "logo": "https://upload.wikimedia.org/wikipedia/commons/6/64/Chosun_University_Emblem.svg"}, {"id": "wku", "name": "원광대학교", "short": "원광대", "region": "광주/전라", "type": "사립", "color": "#004B8D", "eng": "원불교 설립 대형종합대, 탄소융합·전기기계·스마트헬스케어", "logo": ""}, {"id": "jj", "name": "전주대학교", "short": "전주대", "region": "광주/전라", "type": "사립", "color": "#003876", "eng": "탄소나노신소재, 인공지능, 가상증강현실, 소방안전", "logo": ""}, {"id": "honam", "name": "호남대학교", "short": "호남대", "region": "광주/전라", "type": "사립", "color": "#002855", "eng": "전교생 AI융합교육, 미래모빌리티·로봇드론·소프트웨어", "logo": ""}, {"id": "woosuk", "name": "우석대학교", "short": "우석대", "region": "광주/전라", "type": "사립", "color": "#003366", "eng": "전주/진천 캠퍼스 소방방재·수소연료전지·스마트ICT", "logo": ""}, {"id": "gwangju", "name": "광주대학교", "short": "광주대", "region": "광주/전라", "type": "사립", "color": "#004B87", "eng": "도시부동산, 전기소프트웨어, 보건생명", "logo": ""}, {"id": "dsu", "name": "동신대학교", "short": "동신대", "region": "광주/전라", "type": "사립", "color": "#005596", "eng": "한전 나주혁신도시 연계 에너지공학·스마트전기소프트웨어", "logo": ""}, {"id": "nambu", "name": "남부대학교", "short": "남부대", "region": "광주/전라", "type": "사립", "color": "#1C3F95", "eng": "자동차기계, 정보보안, 보건복지", "logo": ""}, {"id": "songwon", "name": "송원대학교", "short": "송원대", "region": "광주/전라", "type": "사립", "color": "#003876", "eng": "철도운전시스템, 전기사이버, 건축공학", "logo": ""}, {"id": "chodang", "name": "초당대학교", "short": "초당대", "region": "광주/전라", "type": "사립", "color": "#003366", "eng": "호남권 유일 비행교육원 보유 항공운항·드론·항공정비", "logo": ""}, {"id": "sehan", "name": "세한대학교", "short": "세한대", "region": "광주/전라", "type": "사립", "color": "#002F6C", "eng": "영암/당진 캠퍼스 항공모빌리티·해양레저·정보보호", "logo": ""}, {"id": "howon", "name": "호원대학교", "short": "호원대", "region": "광주/전라", "type": "산업대", "color": "#003876", "eng": "군산 소재 산업대, K-컬처 실용음악 및 자동차기계", "logo": ""}, {"id": "afc", "name": "한국농수산대학교", "short": "한농대", "region": "광주/전라", "type": "특수목적", "color": "#004E38", "eng": "농림축산식품부 국립 전문농업경영·스마트팜 특화", "logo": ""}, {"id": "kwu", "name": "광주여자대학교", "short": "광주여대", "region": "광주/전라", "type": "사립", "color": "#8B1735", "eng": "항공서비스·미용과학·보건융합 특성화", "logo": ""}, {"id": "jesus", "name": "예수대학교", "short": "예수대", "region": "광주/전라", "type": "사립", "color": "#003366", "eng": "전주 소재 간호보건 및 사회복지 특성화", "logo": ""}, {"id": "yewon", "name": "예원예술대학교", "short": "예원예대", "region": "광주/전라", "type": "사립", "color": "#8B0029", "eng": "문화예술 및 엔터테인먼트디자인", "logo": ""}, {"id": "gnue", "name": "광주교육대학교", "short": "광주교대", "region": "광주/전라", "type": "교육대", "color": "#003876", "eng": "광주전남 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "jnue", "name": "전주교육대학교", "short": "전주교대", "region": "광주/전라", "type": "교육대", "color": "#003366", "eng": "전북권 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "gcatholic", "name": "광주가톨릭대학교", "short": "광주가톨릭대", "region": "광주/전라", "type": "사립", "color": "#7A1C20", "eng": "천주교 광주대교구 사제 양성", "logo": ""}, {"id": "mcatholic", "name": "목포가톨릭대학교", "short": "목포가톨릭대", "region": "광주/전라", "type": "사립", "color": "#003876", "eng": "간호보건 및 유아교육 특성화", "logo": ""}, {"id": "kwangshin", "name": "광신대학교", "short": "광신대", "region": "광주/전라", "type": "사립", "color": "#003366", "eng": "기독교 신학 및 사회복지", "logo": ""}, {"id": "htus", "name": "호남신학대학교", "short": "호남신학대", "region": "광주/전라", "type": "사립", "color": "#1B365D", "eng": "기독교 장로회 신학 교육", "logo": ""}, {"id": "hanil", "name": "한일장신대학교", "short": "한일장신대", "region": "광주/전라", "type": "사립", "color": "#1B365D", "eng": "신학 및 사회복지/간호 특성화", "logo": ""}, {"id": "youngsan", "name": "영산선학대학교", "short": "영산선학대", "region": "광주/전라", "type": "사립", "color": "#8C6239", "eng": "원불교 성직자(전무출신) 양성 전문 교육기관", "logo": ""}, {"id": "kangwon", "name": "강원대학교", "short": "강원대", "region": "강원", "type": "국립", "color": "#003876", "eng": "강원도 대표 거점국립대, 수소에너지·바이오정밀의료·정밀화학·소프트웨어", "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Kangwon_National_University_Emblem.svg"}, {"id": "gwnu", "name": "국립강릉원주대학교", "short": "강릉원주대", "region": "강원", "type": "국립", "color": "#002855", "eng": "강릉/원주 캠퍼스 신소재·해양생명공학·정보통신·치과대학", "logo": ""}, {"id": "yonsei_mirae", "name": "연세대학교 미래", "short": "연세대(미래)", "region": "강원", "type": "사립", "color": "#003876", "eng": "원주혁신도시 연계 의료AI·의공학·소프트웨어디지털헬스케어", "logo": ""}, {"id": "hallym", "name": "한림대학교", "short": "한림대", "region": "강원", "type": "사립", "color": "#003366", "eng": "글로컬대학 지정, AI의료융합·소프트웨어융합·바이오메디컬", "logo": ""}, {"id": "cku", "name": "가톨릭관동대학교", "short": "가톨릭관동대", "region": "강원", "type": "사립", "color": "#003F7A", "eng": "항공운항·무인항공·의료융합·소프트웨어", "logo": ""}, {"id": "sangji", "name": "상지대학교", "short": "상지대", "region": "강원", "type": "사립", "color": "#004E38", "eng": "스마트모빌리티, 탄소중립환경공학, 컴퓨터소프트웨어", "logo": ""}, {"id": "halla", "name": "한라대학교", "short": "한라대", "region": "강원", "type": "사립", "color": "#003876", "eng": "HL만도 재단 스마트모빌리티·자율주행자동차·전기전자 전국 유망", "logo": ""}, {"id": "kd", "name": "경동대학교", "short": "경동대", "region": "강원", "type": "사립", "color": "#002855", "eng": "원주메디컬캠퍼스 간호보건, 양주캠퍼스 컴퓨터공학", "logo": ""}, {"id": "cnue", "name": "춘천교육대학교", "short": "춘천교대", "region": "강원", "type": "교육대", "color": "#003876", "eng": "강원권 초등교원 양성 국립 교육대학", "logo": ""}, {"id": "flower", "name": "가톨릭꽃동네대학교", "short": "꽃동네대", "region": "대전/세종/충청", "type": "사립", "color": "#7A1C20", "eng": "사회복지 및 간호 특성화 대학", "logo": ""}, {"id": "jeju", "name": "제주대학교", "short": "제주대", "region": "제주", "type": "국립", "color": "#003876", "eng": "제주 유일 거점국립대, 풍력신재생에너지·해양생명과학·전기전자공학", "logo": ""}, {"id": "jeju_intl", "name": "제주국제대학교", "short": "제주국제대", "region": "제주", "type": "사립", "color": "#004B8D", "eng": "제주 지역 기반 실무 중심 교육", "logo": ""}];
+    const PRESETS = {"engineering": {"S+ (World Class 연구중심)": ["kaist", "snu", "postech"], "S (최상위 과기원 & 메이저 공대)": ["unist", "gist", "dgist", "skku", "skku_sci", "yonsei", "korea"], "A+ (전통 공학 명문 & 산학 클러스터)": ["hanyang", "erica", "sogang", "knu", "pnu", "ajou", "inha", "seoultech", "kentech"], "A (상위권 공학 특성화 & 중점 연구)": ["cau", "khu", "khu_intl", "uos", "konkuk", "dongguk", "hongik", "kookmin", "soongsil", "sejong", "kwangwoon", "koreatech", "kau", "kumoh", "tukorea", "cnu", "jnu"], "B+ (거점 국립 & 유력 공과대학)": ["dankook", "gachon", "inu", "cbnu", "jbnu", "kangwon", "pknu", "cwnu", "kmou", "ut", "hanbat", "ulsan", "yu", "kongju", "hufs_global", "korea_sejong", "hongik_sejong", "konkuk_glocal", "yonsei_mirae", "hallym", "halla", "mju_sci"], "B (지역 산업 연계 & 실무 공학)": ["donga", "chosun", "handong", "kyonggi", "suwon", "sch", "hoseo", "sunmoon", "konyang", "dju", "cju", "woosong", "andong", "gnu", "inje", "deu", "kyungnam", "mnu", "scnu", "ksnu", "mmu", "jeju", "gwnu", "hknu", "hannam", "kmu", "dankook_cheonan", "smu_cheonan", "cau_davinci"], "C (기초 공학 & 종합 연계)": ["ewha", "sookmyung", "mju", "smu", "catholic", "sungshin", "dongduk", "duksung", "swu", "sahmyook", "seokyeong", "hansung", "skhu", "gangseo", "kangnam", "sungkyul", "anyang", "hanshin", "pyeongtaek", "daejin", "shinhan", "cha", "eulji", "yongin", "hansei", "hyupsung", "pcu", "mokwon", "seowon", "semyung", "fdu", "jwu", "u1", "nsu", "kornu", "bu", "joongbu", "hanseo", "kiu", "dhu", "kyungwoon", "dyu", "uu", "gimcheon", "skju", "ks", "dongseo", "tu", "silla", "bufs", "cup", "cs", "ysu", "wku", "jj", "honam", "woosuk", "gwangju", "dsu", "nambu", "songwon", "chodang", "sehan", "howon", "cku", "sangji", "kd", "flower", "jeju_intl", "sunykorea", "chungwoon", "hufs", "dongguk_wise", "konyang_med"], "D (특수목적 & 기타 계열)": ["kma", "kaay", "kna", "afa", "afna", "kndu", "knpa", "karts", "knsu", "nuch", "afc", "kbu", "snue", "ginue", "gjue", "cje", "dnue", "bnue", "cue", "gnue", "jnue", "cnue", "knue", "daegu", "cu", "kaya", "kosin", "kwu", "jesus", "yewon", "daegu_arts"], "E (신학 & 종교계열)": ["bible", "hanyoung", "kcu", "mtu", "puts", "chongshin", "stu", "sjs", "fgtc", "actu", "sangha", "calvin", "luther", "suwon_catholic", "icatholic", "kbtc", "dcatholic", "djs", "ggu", "daeshin", "ytus", "bpt", "gcatholic", "mcatholic", "kwangshin", "htus", "hanil", "youngsan", "chugye", "hsus"]}, "comprehensive": {"S+ (World Class 종합)": ["snu", "kaist", "yonsei", "korea", "skku", "postech"], "S (최상위 종합 & 연구중심)": ["hanyang", "unist", "gist", "dgist", "sogang", "cau", "khu"], "A+ (대형 거점 국립 & 전통 명문)": ["pnu", "knu", "uos", "ewha", "ajou", "inha", "konkuk", "cnu", "jnu"], "A (상위권 종합 & 거점 대학)": ["dongguk", "hongik", "sookmyung", "kookmin", "soongsil", "sejong", "seoultech", "hufs", "cbnu", "jbnu", "kangwon", "kentech", "erica"], "B+ (수도권 주요대 & 지역 명문)": ["dankook", "gachon", "inu", "kwangwoon", "mju", "smu", "catholic", "yu", "donga", "ulsan", "jeju", "pknu", "cwnu", "gnu", "koreatech", "kau", "kongju"], "B (중견 종합대학)": ["kyonggi", "suwon", "hansung", "seokyeong", "swu", "sungshin", "dongduk", "duksung", "sch", "hoseo", "hannam", "dju", "cju", "woosong", "chosun", "wku", "jj", "hallym", "kumoh", "kmou", "ut", "hanbat", "andong", "scnu", "mnu", "ksnu", "korea_sejong", "hongik_sejong", "konkuk_glocal", "yonsei_mirae"], "C (지역 거점 & 실무 중심)": ["daegu", "cu", "kmu", "handong", "inje", "deu", "kyungnam", "dongseo", "bufs", "woosuk", "honam", "gwangju", "dsu", "halla", "sangji", "cku", "gwnu", "kd", "sunmoon", "konyang", "semyung", "seowon", "bu", "nsu", "joongbu", "hanseo", "hknu", "kangnam", "anyang", "pyeongtaek", "daejin", "shinhan", "cha", "eulji", "yongin", "tukorea", "chungwoon"], "D (특수목적/교육/소규모)": ["knue", "snue", "ginue", "gjue", "cje", "dnue", "bnue", "cue", "gnue", "jnue", "cnue", "karts", "knsu", "kma", "kaay", "kna", "afa", "afna", "kndu", "knpa", "nuch", "afc", "kbu", "sunykorea", "sahmyook", "skhu", "gangseo", "sungkyul", "hanshin", "hansei", "hyupsung", "hsus", "pcu", "mokwon", "fdu", "jwu", "u1", "kornu", "kiu", "dhu", "kyungwoon", "dyu", "uu", "gimcheon", "skju", "kaya", "ks", "tu", "silla", "cup", "cs", "ysu", "kosin", "mmu", "nambu", "songwon", "chodang", "sehan", "howon", "kwu", "jesus", "yewon", "flower", "jeju_intl", "daegu_arts"], "E (신학 및 종교계)": ["bible", "hanyoung", "kcu", "mtu", "puts", "chongshin", "stu", "sjs", "fgtc", "actu", "sangha", "calvin", "luther", "suwon_catholic", "icatholic", "kbtc", "dcatholic", "djs", "ggu", "daeshin", "ytus", "bpt", "gcatholic", "mcatholic", "kwangshin", "htus", "hanil", "youngsan", "chugye", "skku_sci", "mju_sci", "konyang_med", "hufs_global", "khu_intl", "cau_davinci", "dankook_cheonan", "smu_cheonan", "dongguk_wise"]}, "humanities": {"S+ (World Class 인문·사회)": ["snu", "korea", "yonsei"], "S (전통의 인문·사회 거두)": ["skku", "sogang", "hanyang", "cau", "khu", "ewha"], "A+ (특성화 독보 & 거점 명문)": ["hufs", "uos", "pnu", "knu", "konkuk", "dongguk", "sookmyung", "kongju"], "A (상위권 인문사회 & 거점국립)": ["kookmin", "soongsil", "dankook", "cnu", "jnu", "cbnu", "jbnu", "kangwon", "sejong", "hongik", "ajou", "inha"], "B+ (수도권 주요 & 지역 거점)": ["gachon", "inu", "mju", "smu", "catholic", "sungshin", "dongduk", "duksung", "swu", "hansung", "seokyeong", "yu", "donga", "jeju", "pknu", "cwnu", "gnu", "ulsan", "korea_sejong", "yonsei_mirae", "erica"], "B (중견 인문사회 및 종합)": ["kyonggi", "suwon", "hannam", "dju", "cju", "woosong", "sch", "hoseo", "sunmoon", "konyang", "chosun", "wku", "jj", "handong", "daegu", "cu", "kmu", "inje", "deu", "kyungnam", "dongseo", "bufs", "hallym", "andong", "scnu", "mnu", "ksnu", "gwnu"], "C (실무/지역 기반 종합)": ["kangnam", "sungkyul", "anyang", "hanshin", "pyeongtaek", "daejin", "shinhan", "yongin", "seowon", "semyung", "bu", "nsu", "joongbu", "kiu", "dhu", "dyu", "skju", "ks", "tu", "silla", "woosuk", "honam", "gwangju", "dsu", "cku", "sangji", "halla", "kd", "flower", "jeju_intl", "chungwoon", "hknu", "hanseo"], "D (교원양성 & 특수목적)": ["snue", "ginue", "gjue", "cje", "dnue", "bnue", "cue", "gnue", "jnue", "cnue", "knue", "knpa", "kndu", "kma", "kaay", "kna", "afa", "afna", "karts", "knsu", "nuch", "afc", "kbu", "sunykorea", "sahmyook", "skhu", "gangseo", "hansei", "hyupsung", "pcu", "mokwon", "fdu", "jwu", "u1", "kornu", "kyungwoon", "uu", "gimcheon", "kaya", "cup", "cs", "ysu", "kosin", "mmu", "nambu", "songwon", "chodang", "sehan", "howon", "kwu", "jesus", "yewon", "daegu_arts"], "E (이공계 특화 & 신학계열)": ["kaist", "postech", "unist", "gist", "dgist", "kentech", "seoultech", "kwangwoon", "koreatech", "kau", "kumoh", "tukorea", "kmou", "ut", "hanbat", "cha", "eulji", "hsus", "bible", "hanyoung", "kcu", "mtu", "puts", "chongshin", "stu", "sjs", "fgtc", "actu", "sangha", "calvin", "luther", "suwon_catholic", "icatholic", "kbtc", "dcatholic", "djs", "ggu", "daeshin", "ytus", "bpt", "gcatholic", "mcatholic", "kwangshin", "htus", "hanil", "youngsan", "chugye", "skku_sci", "mju_sci", "konyang_med", "hufs_global", "khu_intl", "cau_davinci", "dankook_cheonan", "smu_cheonan", "dongguk_wise", "hongik_sejong", "konkuk_glocal"]}};
+
+    // UNIVERSITY MAP BY ID
+    const univMap = {};
+    UNIVERSITIES.forEach(u => { univMap[u.id] = u; });
+
+    // DEFAULT TIERS CONFIG
+    const DEFAULT_TIERS = [
+      { id: 'tier-s-plus', label: 'S+', color: '#ff7f7f', univs: [] },
+      { id: 'tier-s', label: 'S', color: '#ffbf7f', univs: [] },
+      { id: 'tier-a-plus', label: 'A+', color: '#ffdf7f', univs: [] },
+      { id: 'tier-a', label: 'A', color: '#ffff7f', univs: [] },
+      { id: 'tier-b-plus', label: 'B+', color: '#bfff7f', univs: [] },
+      { id: 'tier-b', label: 'B', color: '#7fff7f', univs: [] },
+      { id: 'tier-c', label: 'C', color: '#7fffff', univs: [] },
+      { id: 'tier-d', label: 'D', color: '#7fbfff', univs: [] },
+      { id: 'tier-e', label: 'E', color: '#bf7fff', univs: [] }
+    ];
+
+    let currentTiers = JSON.parse(JSON.stringify(DEFAULT_TIERS));
+    let unrankedPool = UNIVERSITIES.map(u => u.id); // All start in pool
+    let activePresetTab = 'engineering';
+    let selectedTierColor = '#ff7f7f';
+
+    // FILTER STATES
+    let currentRegionFilter = 'ALL';
+    let currentTypeFilter = 'ALL';
+    let currentSearchTerm = '';
+
+    // CHOSUNG HELPER FOR KOREAN SEARCH
+    const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+    function getChosung(str) {
+      let result = '';
+      for (let i = 0; i < str.length; i++) {
+        const code = str.charCodeAt(i) - 44032;
+        if (code >= 0 && code <= 11171) {
+          result += CHOSUNG[Math.floor(code / 588)];
+        } else {
+          result += str.charAt(i);
+        }
+      }
+      return result;
+    }
+
+    // INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedState();
+      renderAll();
+      renderPresetSection();
+    });
+
+    // LOCAL STORAGE PERSISTENCE
+    function saveState() {
+      const state = {
+        tiers: currentTiers,
+        pool: unrankedPool
+      };
+      localStorage.setItem('univ_tiermaker_save_v1', JSON.stringify(state));
+    }
+
+    function loadSavedState() {
+      try {
+        const saved = localStorage.getItem('univ_tiermaker_save_v1');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.tiers && parsed.pool) {
+            currentTiers = parsed.tiers;
+            unrankedPool = parsed.pool;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load saved state:', e);
+      }
+    }
+
+    // RENDER FUNCTIONS
+    function renderAll() {
+      renderTierBoard();
+      renderPool();
+      updateCounts();
+    }
+
+    function updateCounts() {
+      let rankedCount = 0;
+      currentTiers.forEach(t => { rankedCount += t.univs.length; });
+      document.getElementById('ranked-count').textContent = rankedCount;
+      document.getElementById('pool-count').textContent = unrankedPool.length + '개';
+    }
+
+    function renderTierBoard() {
+      const board = document.getElementById('main-tier-board');
+      board.innerHTML = '';
+
+      currentTiers.forEach((tier, index) => {
+        const row = document.createElement('div');
+        row.className = 'tier-row';
+        row.id = `row-${tier.id}`;
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'tier-header';
+        header.style.backgroundColor = tier.color;
+        header.title = '클릭하여 라벨 수정';
+        header.onclick = () => promptEditTierLabel(index);
+
+        header.innerHTML = `
+          <div class="tier-label">${escapeHtml(tier.label)}</div>
+          <div class="tier-count">${tier.univs.length}개</div>
+        `;
+
+        // Actions
+        const actions = document.createElement('div');
+        actions.className = 'tier-actions';
+        actions.innerHTML = `
+          <button class="tier-action-btn" title="위로 이동" onclick="moveTier(${index}, -1)">▲</button>
+          <button class="tier-action-btn" title="아래로 이동" onclick="moveTier(${index}, 1)">▼</button>
+          <button class="tier-action-btn" title="색상 변경" onclick="promptChangeTierColor(${index})">🎨</button>
+          <button class="tier-action-btn" title="티어 비우기" onclick="clearTierUnivs(${index})">🧹</button>
+          <button class="tier-action-btn" title="티어 삭제" onclick="deleteTier(${index})" style="color: #f87171;">✕</button>
+        `;
+
+        // Dropzone
+        const dropzone = document.createElement('div');
+        dropzone.className = 'tier-dropzone';
+        dropzone.dataset.tierIndex = index;
+        dropzone.ondragover = handleDragOver;
+        dropzone.ondragleave = handleDragLeave;
+        dropzone.ondrop = (e) => handleDrop(e, index);
+
+        // Populate cards
+        tier.univs.forEach(uid => {
+          const univ = univMap[uid];
+          if (univ) {
+            dropzone.appendChild(createUnivCard(univ, index));
+          }
+        });
+
+        row.appendChild(header);
+        row.appendChild(actions);
+        row.appendChild(dropzone);
+        board.appendChild(row);
+      });
+    }
+
+    function renderPool() {
+      const pool = document.getElementById('unranked-pool');
+      pool.innerHTML = '';
+
+      const term = currentSearchTerm.trim().toLowerCase();
+      const termChosung = getChosung(term);
+
+      const filteredIds = unrankedPool.filter(uid => {
+        const u = univMap[uid];
+        if (!u) return false;
+
+        // Region filter
+        if (currentRegionFilter !== 'ALL' && !u.region.includes(currentRegionFilter)) {
+          return false;
+        }
+
+        // Type filter
+        if (currentTypeFilter !== 'ALL' && u.type !== currentTypeFilter) {
+          return false;
+        }
+
+        // Search term filter
+        if (term) {
+          const nameLower = u.name.toLowerCase();
+          const shortLower = u.short.toLowerCase();
+          const nameChosung = getChosung(nameLower);
+          const shortChosung = getChosung(shortLower);
+
+          const matchName = nameLower.includes(term) || shortLower.includes(term);
+          const matchChosung = nameChosung.includes(termChosung) || shortChosung.includes(termChosung);
+
+          if (!matchName && !matchChosung) return false;
+        }
+
+        return true;
+      });
+
+      if (filteredIds.length === 0) {
+        pool.innerHTML = `
+          <div class="pool-empty-message">
+            <span>🔍 조건에 맞는 대학이 없습니다.</span>
+            <span style="font-size: 12px; color: var(--text-sub);">검색어를 지우거나 필터를 변경해보세요.</span>
+          </div>
+        `;
+        return;
+      }
+
+      filteredIds.forEach(uid => {
+        const univ = univMap[uid];
+        if (univ) {
+          pool.appendChild(createUnivCard(univ, 'pool'));
+        }
+      });
+    }
+
+    // CREATE UNIVERSITY CARD ELEMENT
+    function createUnivCard(univ, currentTierIndex) {
+      const card = document.createElement('div');
+      card.className = 'univ-card';
+      card.id = `card-${univ.id}`;
+      card.draggable = true;
+      card.dataset.id = univ.id;
+      card.dataset.source = currentTierIndex;
+
+      // Drag Events
+      card.ondragstart = handleDragStart;
+      card.ondragend = handleDragEnd;
+
+      // Tooltip Events
+      card.onmouseenter = (e) => showTooltip(e, univ);
+      card.onmouseleave = hideTooltip;
+
+      // Click for Quick Move
+      card.onclick = (e) => {
+        e.stopPropagation();
+        openQuickMenu(e, univ, currentTierIndex);
+      };
+
+      // Logo or SVG/Badge
+      const emblem = document.createElement('div');
+      emblem.className = 'univ-emblem';
+
+      if (univ.logo) {
+        const img = document.createElement('img');
+        img.className = 'univ-logo-img';
+        img.src = univ.logo;
+        img.alt = univ.short;
+        img.onerror = () => {
+          // Replace with colored badge on load fail
+          emblem.innerHTML = '';
+          emblem.style.backgroundColor = univ.color || '#1e3a8a';
+          emblem.innerHTML = `<span class="univ-badge-fallback">${escapeHtml(univ.short.slice(0, 3))}</span>`;
+        };
+        emblem.appendChild(img);
+      } else {
+        emblem.style.backgroundColor = univ.color || '#1e3a8a';
+        emblem.innerHTML = `<span class="univ-badge-fallback">${escapeHtml(univ.short.slice(0, 3))}</span>`;
+      }
+
+      const shortName = document.createElement('div');
+      shortName.className = 'univ-short-name';
+      shortName.textContent = univ.short;
+      shortName.title = univ.name;
+
+      const meta = document.createElement('div');
+      meta.className = 'univ-meta';
+      meta.innerHTML = `
+        <span class="univ-tag">${univ.region.split('/')[0]}</span>
+        <span class="univ-tag">${univ.type}</span>
+      `;
+
+      card.appendChild(emblem);
+      card.appendChild(shortName);
+      card.appendChild(meta);
+
+      return card;
+    }
+
+    // DRAG AND DROP HANDLERS
+    let draggedUnivId = null;
+    let draggedSource = null;
+
+    function handleDragStart(e) {
+      draggedUnivId = this.dataset.id;
+      draggedSource = this.dataset.source;
+      this.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', draggedUnivId);
+      e.dataTransfer.effectAllowed = 'move';
+      hideTooltip();
+    }
+
+    function handleDragEnd(e) {
+      this.classList.remove('dragging');
+      document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+      draggedUnivId = null;
+      draggedSource = null;
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      this.classList.add('drag-over');
+    }
+
+    function handleDragLeave(e) {
+      this.classList.remove('drag-over');
+    }
+
+    function handleDrop(e, target) {
+      e.preventDefault();
+      this.classList.remove('drag-over');
+
+      if (!draggedUnivId) return;
+
+      // Remove from source
+      if (draggedSource === 'pool') {
+        const idx = unrankedPool.indexOf(draggedUnivId);
+        if (idx !== -1) unrankedPool.splice(idx, 1);
+      } else {
+        const sIndex = parseInt(draggedSource, 10);
+        if (currentTiers[sIndex]) {
+          const idx = currentTiers[sIndex].univs.indexOf(draggedUnivId);
+          if (idx !== -1) currentTiers[sIndex].univs.splice(idx, 1);
+        }
+      }
+
+      // Add to target
+      if (target === 'pool') {
+        if (!unrankedPool.includes(draggedUnivId)) {
+          unrankedPool.unshift(draggedUnivId);
+        }
+      } else {
+        const tIndex = parseInt(target, 10);
+        if (currentTiers[tIndex] && !currentTiers[tIndex].univs.includes(draggedUnivId)) {
+          currentTiers[tIndex].univs.push(draggedUnivId);
+        }
+      }
+
+      saveState();
+      renderAll();
+    }
+
+    // TIER ROW CONTROLS
+    function moveTier(index, direction) {
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= currentTiers.length) return;
+
+      const temp = currentTiers[index];
+      currentTiers[index] = currentTiers[newIndex];
+      currentTiers[newIndex] = temp;
+
+      saveState();
+      renderAll();
+    }
+
+    function promptEditTierLabel(index) {
+      const current = currentTiers[index].label;
+      const updated = prompt('티어 이름을 입력하세요:', current);
+      if (updated !== null && updated.trim() !== '') {
+        currentTiers[index].label = updated.trim();
+        saveState();
+        renderAll();
+      }
+    }
+
+    function promptChangeTierColor(index) {
+      const colors = ['#ff7f7f', '#ffbf7f', '#ffdf7f', '#ffff7f', '#bfff7f', '#7fff7f', '#7fffff', '#7fbfff', '#bf7fff', '#ff7fbf', '#e2e8f0', '#94a3b8'];
+      const current = currentTiers[index].color;
+      let nextIndex = (colors.indexOf(current) + 1) % colors.length;
+      if (nextIndex < 0) nextIndex = 0;
+      currentTiers[index].color = colors[nextIndex];
+      saveState();
+      renderAll();
+      showToast(`티어 색상이 변경되었습니다.`);
+    }
+
+    function clearTierUnivs(index) {
+      if (!currentTiers[index].univs.length) return;
+      if (confirm(`'${currentTiers[index].label}' 티어의 모든 대학(${currentTiers[index].univs.length}개)을 대기열 풀로 되돌리시겠습니까?`)) {
+        unrankedPool.unshift(...currentTiers[index].univs);
+        currentTiers[index].univs = [];
+        saveState();
+        renderAll();
+        showToast('티어가 비워졌습니다.');
+      }
+    }
+
+    function deleteTier(index) {
+      if (currentTiers.length <= 1) {
+        alert('최소 1개 이상의 티어가 있어야 합니다.');
+        return;
+      }
+      const tier = currentTiers[index];
+      if (confirm(`'${tier.label}' 티어를 삭제하시겠습니까? (포함된 대학은 대기열 풀로 복귀합니다)`)) {
+        unrankedPool.unshift(...tier.univs);
+        currentTiers.splice(index, 1);
+        saveState();
+        renderAll();
+        showToast('티어가 삭제되었습니다.');
+      }
+    }
+
+    // ADD TIER MODAL
+    function openAddTierModal() {
+      document.getElementById('add-tier-modal').classList.add('active');
+      document.getElementById('new-tier-label').focus();
+    }
+
+    function closeAddTierModal() {
+      document.getElementById('add-tier-modal').classList.remove('active');
+    }
+
+    function selectColor(color, element) {
+      selectedTierColor = color;
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    function confirmAddTier() {
+      const label = document.getElementById('new-tier-label').value.trim() || 'NEW';
+      const pos = document.getElementById('new-tier-position').value;
+      const newTier = {
+        id: 'tier-' + Date.now(),
+        label: label,
+        color: selectedTierColor,
+        univs: []
+      };
+
+      if (pos === 'top') {
+        currentTiers.unshift(newTier);
+      } else {
+        currentTiers.push(newTier);
+      }
+
+      closeAddTierModal();
+      saveState();
+      renderAll();
+      showToast(`'${label}' 티어가 추가되었습니다.`);
+    }
+
+    // RESET TO POOL
+    function resetAllToPool() {
+      if (confirm('모든 대학을 대기열 풀로 되돌리고 티어를 초기화하시겠습니까?')) {
+        currentTiers = JSON.parse(JSON.stringify(DEFAULT_TIERS));
+        unrankedPool = UNIVERSITIES.map(u => u.id);
+        saveState();
+        renderAll();
+        showToast('모든 대학이 대기열 풀로 복귀되었습니다.');
+      }
+    }
+
+    // FILTER LOGIC
+    function setRegionFilter(region, el) {
+      currentRegionFilter = region;
+      document.querySelectorAll('#region-chips .chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      renderPool();
+    }
+
+    function setTypeFilter(type, el) {
+      currentTypeFilter = type;
+      document.querySelectorAll('#type-chips .chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      renderPool();
+    }
+
+    function filterUniversities() {
+      currentSearchTerm = document.getElementById('univ-search').value;
+      renderPool();
+    }
+
+    // VIEW MODE TOGGLE
+    function setViewMode(mode) {
+      document.body.classList.remove('mode-name-only', 'mode-compact');
+      document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+
+      if (mode === 'name-only') {
+        document.body.classList.add('mode-name-only');
+        event.target.classList.add('active');
+      } else if (mode === 'compact') {
+        document.body.classList.add('mode-compact');
+        event.target.classList.add('active');
+      } else {
+        event.target.classList.add('active');
+      }
+    }
+
+    // TOOLTIP
+    const tooltipEl = document.getElementById('card-tooltip');
+    function showTooltip(e, univ) {
+      document.getElementById('tt-name').textContent = univ.name;
+      document.getElementById('tt-type').textContent = `${univ.region} • ${univ.type}`;
+      document.getElementById('tt-eng').textContent = univ.eng;
+
+      const rect = e.target.getBoundingClientRect();
+      let left = rect.left + rect.width / 2 - 140;
+      let top = rect.top - 95;
+
+      if (left < 10) left = 10;
+      if (left + 290 > window.innerWidth) left = window.innerWidth - 300;
+      if (top < 10) top = rect.bottom + 10;
+
+      tooltipEl.style.left = `${left}px`;
+      tooltipEl.style.top = `${top}px`;
+      tooltipEl.classList.add('visible');
+    }
+
+    function hideTooltip() {
+      tooltipEl.classList.remove('visible');
+    }
+
+    // QUICK MOVE MENU
+    const quickMenu = document.getElementById('quick-menu');
+    function openQuickMenu(e, univ, currentTierIndex) {
+      document.getElementById('quick-menu-univ-name').textContent = univ.name;
+      const opts = document.getElementById('quick-menu-options');
+      opts.innerHTML = '';
+
+      // Option: Move to pool
+      if (currentTierIndex !== 'pool') {
+        const poolItem = document.createElement('div');
+        poolItem.className = 'quick-menu-item';
+        poolItem.innerHTML = '<span>📦</span> 대기열 풀로 보내기';
+        poolItem.onclick = () => {
+          moveUnivDirectly(univ.id, currentTierIndex, 'pool');
+          closeQuickMenu();
+        };
+        opts.appendChild(poolItem);
+      }
+
+      // Options: Move to each tier
+      currentTiers.forEach((tier, tIdx) => {
+        if (currentTierIndex === tIdx) return;
+        const item = document.createElement('div');
+        item.className = 'quick-menu-item';
+        item.innerHTML = `
+          <span class="quick-tier-dot" style="background-color: ${tier.color};"></span>
+          <span>${escapeHtml(tier.label)} 티어로 이동</span>
+        `;
+        item.onclick = () => {
+          moveUnivDirectly(univ.id, currentTierIndex, tIdx);
+          closeQuickMenu();
+        };
+        opts.appendChild(item);
+      });
+
+      let x = e.clientX;
+      let y = e.clientY;
+      if (x + 180 > window.innerWidth) x = window.innerWidth - 190;
+      if (y + 240 > window.innerHeight) y = window.innerHeight - 250;
+
+      quickMenu.style.left = `${x}px`;
+      quickMenu.style.top = `${y}px`;
+      quickMenu.classList.add('active');
+    }
+
+    function closeQuickMenu() {
+      quickMenu.classList.remove('active');
+    }
+    window.addEventListener('click', closeQuickMenu);
+
+    function moveUnivDirectly(uid, from, to) {
+      if (from === 'pool') {
+        const idx = unrankedPool.indexOf(uid);
+        if (idx !== -1) unrankedPool.splice(idx, 1);
+      } else {
+        const sIdx = parseInt(from, 10);
+        if (currentTiers[sIdx]) {
+          const idx = currentTiers[sIdx].univs.indexOf(uid);
+          if (idx !== -1) currentTiers[sIdx].univs.splice(idx, 1);
+        }
+      }
+
+      if (to === 'pool') {
+        unrankedPool.unshift(uid);
+      } else {
+        const tIdx = parseInt(to, 10);
+        if (currentTiers[tIdx]) {
+          currentTiers[tIdx].univs.push(uid);
+        }
+      }
+
+      saveState();
+      renderAll();
+    }
+
+    // PRESET SECTION RENDERING
+    const presetDescriptions = {
+      engineering: `
+        <strong>[공학·기술계열 평가 지표 및 산정 기준]</strong><br>
+        수능 커트라인(입결)을 <strong>완전히 배제</strong>하고 다음 5대 정량/정성 지표를 종합 분석하여 산정했습니다:<br>
+        1) <strong>산학협력 및 정부 연구비 수주 규모</strong> (대학정보공시 기준 대학별 연구비 및 대형 국책과제)<br>
+        2) <strong>공학 교수진 연구실적 및 논문 피인용도</strong> (Nature Index, SCI/SCIE급 피인용수)<br>
+        3) <strong>대기업 계약학과 및 R&D 채용 연계율</strong> (삼성·SK·현대차 반도체·배터리·모빌리티 파트너십)<br>
+        4) <strong>특허 및 기술이전 수익성</strong> (국내외 특허 보유 및 기술사업화 실적)<br>
+        5) <strong>BK21 4단계 혁신인재양성사업</strong> 이공계 대형 사업단 수주 현황
+      `,
+      comprehensive: `
+        <strong>[종합 대학 역량 평가 지표 및 산정 기준]</strong><br>
+        QS/THE 글로벌 대학평가, 전임교원 1인당 학생수 및 연구비, 정부 재정지원사업 규모, 학생 1인당 교육비, 도서관 및 캠퍼스 인프라, 국제화 역량을 종합적으로 고려한 평가 모델입니다.
+      `,
+      humanities: `
+        <strong>[인문·사회계열 평가 지표 및 산정 기준]</strong><br>
+        수능 입결을 배제하고 인문한국(HK+), 사회과학연구(SSK) 사업 수주 실적, 로스쿨(법학전문대학원) 인가 및 진학률, 주요 행정·공공인재(5급 고시, 외교관, 언론인) 배출 역사, 학문적 전통과 연구 실적을 중점 평가했습니다.
+      `
+    };
+
+    const presetColors = ['#ff7f7f', '#ffbf7f', '#ffdf7f', '#ffff7f', '#bfff7f', '#7fff7f', '#7fffff', '#7fbfff', '#bf7fff'];
+
+    function switchPresetTab(tab, el) {
+      activePresetTab = tab;
+      document.querySelectorAll('.preset-tab-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      renderPresetSection();
+    }
+
+    function renderPresetSection() {
+      const infoBox = document.getElementById('preset-info-text');
+      infoBox.innerHTML = presetDescriptions[activePresetTab];
+
+      const board = document.getElementById('preset-display-board');
+      board.innerHTML = '';
+
+      const presetData = PRESETS[activePresetTab];
+      let colorIdx = 0;
+
+      for (const [tierTitle, univIds] of Object.entries(presetData)) {
+        const row = document.createElement('div');
+        row.className = 'preset-row';
+
+        const header = document.createElement('div');
+        header.className = 'preset-header-box';
+        header.style.backgroundColor = presetColors[colorIdx % presetColors.length];
+        header.textContent = tierTitle;
+        colorIdx++;
+
+        const container = document.createElement('div');
+        container.className = 'preset-card-container';
+
+        univIds.forEach(uid => {
+          const u = univMap[uid];
+          if (u) {
+            const card = document.createElement('div');
+            card.className = 'univ-card';
+            card.style.cursor = 'default';
+            card.style.height = '62px';
+            card.style.width = '100px';
+
+            card.innerHTML = `
+              <div class="univ-short-name" style="font-size: 13px;">${escapeHtml(u.short)}</div>
+              <div class="univ-meta">
+                <span class="univ-tag">${u.region.split('/')[0]}</span>
+                <span class="univ-tag">${u.type}</span>
+              </div>
+            `;
+            card.onmouseenter = (e) => showTooltip(e, u);
+            card.onmouseleave = hideTooltip;
+            container.appendChild(card);
+          }
+        });
+
+        row.appendChild(header);
+        row.appendChild(container);
+        board.appendChild(row);
+      }
+    }
+
+    // LOAD PRESET TO MAIN TIER BOARD
+    function loadActivePresetToBoard() {
+      const tabName = activePresetTab === 'engineering' ? '공학(공대 기준)' : (activePresetTab === 'comprehensive' ? '종합 역량' : '인문·사회계열');
+      if (confirm(`'${tabName}' 예시 티어표를 내 작업대로 불러오시겠습니까?\n(현재 작업 중인 내용은 덮어씌워지며, 자유롭게 수정할 수 있습니다)`)) {
+        const presetData = PRESETS[activePresetTab];
+        const newTiers = [];
+        let colorIdx = 0;
+
+        for (const [tierTitle, univIds] of Object.entries(presetData)) {
+          newTiers.push({
+            id: 'tier-' + Date.now() + '-' + colorIdx,
+            label: tierTitle.split(' ')[0], // short label (e.g. S+, S, A+)
+            color: presetColors[colorIdx % presetColors.length],
+            univs: [...univIds]
+          });
+          colorIdx++;
+        }
+
+        currentTiers = newTiers;
+        unrankedPool = []; // All 222 universities are assigned in the preset
+
+        saveState();
+        renderAll();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showToast(`'${tabName}' 예시 티어표가 성공적으로 로드되었습니다!`);
+      }
+    }
+
+    // EXPORT TO PNG (Pure Canvas High Quality Renderer)
+    function exportToImage() {
+      showToast('티어표 이미지를 생성 중입니다...');
+
+      const boardEl = document.getElementById('main-tier-board');
+      const rows = currentTiers;
+
+      // Create off-screen canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const width = 1200;
+      const headerWidth = 140;
+      const padding = 12;
+      const cardWidth = 100;
+      const cardHeight = 70;
+      const cardGap = 8;
+      const cardsPerRow = Math.floor((width - headerWidth - padding * 2) / (cardWidth + cardGap));
+
+      // Calculate row heights
+      const rowHeights = rows.map(r => {
+        const count = r.univs.length;
+        const numLines = Math.max(1, Math.ceil(count / cardsPerRow));
+        return Math.max(90, numLines * (cardHeight + cardGap) + padding * 2);
+      });
+
+      const titleHeight = 90;
+      const footerHeight = 40;
+      const totalHeight = titleHeight + rowHeights.reduce((a, b) => a + b, 0) + footerHeight;
+
+      canvas.width = width * 2; // Retinal 2x
+      canvas.height = totalHeight * 2;
+      ctx.scale(2, 2);
+
+      // Background
+      ctx.fillStyle = '#0b0f19';
+      ctx.fillRect(0, 0, width, totalHeight);
+
+      // Title Banner
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(0, 0, width, titleHeight);
+      ctx.fillStyle = '#3b82f6';
+      ctx.fillRect(0, titleHeight - 3, width, 3);
+
+      ctx.font = 'bold 26px Pretendard, sans-serif';
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillText('대한민국 전국 222개 대학 티어메이커', 30, 42);
+
+      ctx.font = '13px Pretendard, sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('Korea University Tier Maker • 공학/종합/인문 분석 모델', 30, 68);
+
+      // Date stamp
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+      ctx.textAlign = 'right';
+      ctx.fillText(`작성일자: ${dateStr}`, width - 30, 55);
+      ctx.textAlign = 'left';
+
+      // Draw rows
+      let curY = titleHeight;
+      rows.forEach((row, idx) => {
+        const h = rowHeights[idx];
+
+        // Row background
+        ctx.fillStyle = idx % 2 === 0 ? '#111827' : '#0f172a';
+        ctx.fillRect(0, curY, width, h);
+
+        // Header
+        ctx.fillStyle = row.color;
+        ctx.fillRect(0, curY, headerWidth, h);
+
+        // Header Text
+        ctx.font = 'bold 22px Pretendard, sans-serif';
+        ctx.fillStyle = '#0f172a';
+        ctx.textAlign = 'center';
+        ctx.fillText(row.label, headerWidth / 2, curY + h / 2 + 8);
+        ctx.textAlign = 'left';
+
+        // Cards
+        row.univs.forEach((uid, cIdx) => {
+          const u = univMap[uid];
+          if (!u) return;
+
+          const col = cIdx % cardsPerRow;
+          const line = Math.floor(cIdx / cardsPerRow);
+
+          const cx = headerWidth + padding + col * (cardWidth + cardGap);
+          const cy = curY + padding + line * (cardHeight + cardGap);
+
+          // Card box
+          ctx.fillStyle = '#1e293b';
+          roundRect(ctx, cx, cy, cardWidth, cardHeight, 6, true, false);
+
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+          ctx.lineWidth = 1;
+          roundRect(ctx, cx, cy, cardWidth, cardHeight, 6, false, true);
+
+          // Univ name
+          ctx.font = 'bold 13px Pretendard, sans-serif';
+          ctx.fillStyle = '#f8fafc';
+          ctx.textAlign = 'center';
+          ctx.fillText(u.short, cx + cardWidth / 2, cy + 28);
+
+          // Univ tag
+          ctx.font = '10px Pretendard, sans-serif';
+          ctx.fillStyle = '#94a3b8';
+          ctx.fillText(`${u.region.split('/')[0]} • ${u.type}`, cx + cardWidth / 2, cy + 48);
+          ctx.textAlign = 'left';
+        });
+
+        // Separator
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.beginPath();
+        ctx.moveTo(0, curY + h);
+        ctx.lineTo(width, curY + h);
+        ctx.stroke();
+
+        curY += h;
+      });
+
+      // Footer
+      ctx.fillStyle = '#090d16';
+      ctx.fillRect(0, totalHeight - footerHeight, width, footerHeight);
+      ctx.font = '11px Pretendard, sans-serif';
+      ctx.fillStyle = '#64748b';
+      ctx.textAlign = 'center';
+      ctx.fillText('전국 222개 대학 티어메이커 | 4년제 일반대학 및 과기원 완전 수록', width / 2, totalHeight - 16);
+
+      // Trigger download
+      try {
+        const link = document.createElement('a');
+        link.download = `대학_티어메이커_${dateStr}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('티어표 이미지가 저장되었습니다! 📥');
+      } catch (err) {
+        console.error('Canvas export error:', err);
+        alert('이미지 생성 중 오류가 발생했습니다.');
+      }
+    }
+
+    function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    // UTILS
+    function showToast(msg) {
+      const toast = document.getElementById('toast-msg');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function escapeHtml(string) {
+      return String(string).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>
